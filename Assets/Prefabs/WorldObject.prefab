@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5085472777420733554}
+  - component: {fileID: 2449816464885966685}
   - component: {fileID: 5085472777420733552}
   - component: {fileID: 5085472777420733555}
   - component: {fileID: 1198744053669864135}
@@ -20,8 +20,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5085472777420733554
-Transform:
+--- !u!224 &2449816464885966685
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -35,6 +35,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5085472777420733552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,7 +76,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.5, y: 1.25}
   m_EdgeRadius: 0
 --- !u!114 &1198744053669864135
 MonoBehaviour:
@@ -85,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c33691474e80421285114b351f08326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _childSprite: {fileID: 6663722201335252845}
+  _childObj: {fileID: 6663722201335252845}
 --- !u!212 &7264415500205197037
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -165,7 +170,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5085472777420733554}
+  m_Father: {fileID: 2449816464885966685}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7938728430270355261

@@ -10,6 +10,8 @@ public class DragDrop : MonoBehaviour
     BoxCollider2D _collider;
     Vector2 _originalPos;
 
+    public bool IsDragging { get { return _isDragging; } }
+
     void Awake()
     {
         _transform = transform;
