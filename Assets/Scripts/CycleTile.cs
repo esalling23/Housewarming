@@ -10,7 +10,10 @@ public class CycleTile : Tile
     [SerializeField]
     List<Sprite> tiles;
 
-    Sprite newSprite;
+    [SerializeField]
+    TileType type;
+
+    Sprite _newSprite;
 
     public override void GetTileData(Vector3Int location, ITilemap tilemap, ref TileData tileData)
     {
@@ -20,11 +23,11 @@ public class CycleTile : Tile
 
         if (Application.isPlaying)
         {
-            Debug.Log(RoomManager.Instance.ChosenTileIndex);
-            newSprite = tiles[RoomManager.Instance.ChosenTileIndex];
-            Debug.Log(newSprite);
+            Debug.Log(RoomManager.Instance.TileStyleSelection[type]);
+            _newSprite = tiles[RoomManager.Instance.TileStyleSelection[type]];
+            Debug.Log(_newSprite);
 
-            tileData.sprite = newSprite;
+            tileData.sprite = _newSprite;
         }
     }
 }

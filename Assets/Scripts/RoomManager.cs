@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
 public class RoomManager : MonoBehaviour
 {
-    GameObject _selected;
+    TileManager[] _tileManagers;
+
+    WorldObject _selected;
     BoxCollider2D _selectedCollider;
     Transform _selectedTransform;
-
-    // Tile change support
-    // [SerializeField]
-    // Tilemap _floorTileMap;
-    // CycleTile _floorTile;
-
+    TileManager _selectedTileManager;
+    Dictionary <TileType, int> _tileStyleSelection;
     int _chosenTileIndex = 0;
 
-    // Singleton (i think)
+    // Singleton
     static RoomManager _instance;
 
     public static RoomManager Instance
@@ -43,6 +42,11 @@ public class RoomManager : MonoBehaviour
         get { return _chosenTileIndex; }
     }
 
+    public Dictionary<TileType, int> TileStyleSelection
+    {
+        get { return _tileStyleSelection; }
+    }
+
     void Awake()
     {
         if (!_instance)
@@ -53,25 +57,31 @@ public class RoomManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        _tileManagers = FindObjectsOfType<TileManager>();
+        _tileStyleSelection = new Dictionary<TileType, int>();
+
+        foreach (TileManager manager in _tileManagers)
+        {
+            // Debug.Log(manager.Type);
+            WorldObject worldObject = manager.gameObject.GetComponent<WorldObject>();
+            // Debug.Log(worldObject.SelectedStyleIndex);
+            _tileStyleSelection.Add(manager.Type, worldObject.SelectedStyleIndex);
+        }
     }
 
     void Start()
     {
         EventManager.StartListening(EventName.SelectObject, HandleUpdateSelected);
         EventManager.StartListening(EventName.RotateObject, HandleRotateSelected);
-        EventManager.StartListening(EventName.RotateObject, HandleCycleSelected);
-    }
-
-    void Update()
-    {
-
+        EventManager.StartListening(EventName.CycleObject, HandleCycleSelected);
     }
 
     void HandleUpdateSelected(Dictionary<string, object> msg)
     {
-        _selected = (GameObject) msg["obj"];
-        _selectedTransform = _selected.transform;
-        _selectedCollider = _selected.GetComponent<BoxCollider2D>();
+        _selected = (WorldObject) msg["obj"];
+        _selectedTransform = _selected.gameObject.transform;
+        _selectedTileManager = _selected.gameObject.GetComponent<TileManager>();
 
         Debug.Log(_selected);
     }
@@ -85,21 +95,12 @@ public class RoomManager : MonoBehaviour
     void HandleCycleSelected(Dictionary<string, object> msg)
     {
         Debug.Log("Cycling");
-    }
+        _selected.CycleStyle();
 
-    // public void HandleCycleFloorTiles(int limit)
-    // {
-    //     Debug.Log($"Chosen tile index is {_chosenTileIndex}");
-    //     Debug.Log($"Limit index count is {limit}");
-    //     if (_chosenTileIndex < limit)
-    //     {
-    //         _chosenTileIndex++;
-    //     }
-    //     else
-    //     {
-    //         _chosenTileIndex = 0;
-    //     }
-    //     Debug.Log(_floorTileMap);
-    //     _floorTileMap.RefreshAllTiles();
-    // }
+        if (_selected.IsTilemap)
+        {
+            _selectedTileManager = _selected.gameObject.GetComponent<TileManager>();
+            _tileStyleSelection[_selectedTileManager.Type] = _selected.SelectedStyleIndex;
+        }
+    }
 }

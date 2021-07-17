@@ -22,6 +22,8 @@ public class DragDrop : MonoBehaviour
     [SerializeField] GameObject _childObj;
     Transform _childTransform;
     Vector3 _rotatePivot;
+    Vector3 _borderVector;
+    ContactFilter2D _contactFilter = new ContactFilter2D();
 
     // Color change support
     SpriteRenderer _childSprite;
@@ -63,6 +65,11 @@ public class DragDrop : MonoBehaviour
 
         _childTransform = _childObj.transform;
         _childSprite = _childObj.GetComponent<SpriteRenderer>();
+
+        LayerMask layerMask = (1 << LayerMask.NameToLayer("Walls"))
+                            | (1 << LayerMask.NameToLayer("Furniture"))
+                            | (1 << LayerMask.NameToLayer("Props"));
+        _contactFilter.SetLayerMask(layerMask);
     }
 
     void Start()
@@ -86,8 +93,7 @@ public class DragDrop : MonoBehaviour
 
     bool CanPlace()
     {
-        Vector3 borderVector = new Vector3(0.1f, 0.1f, 0);
-        Collider2D[] overlap = Physics2D.OverlapAreaAll(_collider.bounds.min + borderVector, _collider.bounds.max - borderVector);
+        Collider2D[] overlap = Physics2D.OverlapAreaAll(_collider.bounds.min + _borderVector, _collider.bounds.max - _borderVector, _contactFilter.layerMask);
         if (overlap.Length > 1)
         {
             Debug.Log("Cannot Place");
