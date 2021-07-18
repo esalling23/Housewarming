@@ -32,6 +32,7 @@ public class WorldObject : MonoBehaviour
     {
         get { return _isTilemap; }
     }
+    
     #endregion
 
     #region Methods
