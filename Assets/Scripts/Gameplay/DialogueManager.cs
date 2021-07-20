@@ -11,11 +11,14 @@ public class DialogueManager : MonoBehaviour
     Text _dialogueText;
     DialoguePhase _currentDialoguePhase;
     int _dialogueCounter;
+    Typewriter _typewriter;
 
     void Start()
     {
         _dialogueCounter = 0;
+        _dialogueView.SetActive(false);
 
+        // Debug.Log("Listening for start dialogue");
         EventManager.StartListening(EventName.StartDialogue, StartDialogue);
     }
 
@@ -23,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     {
         _dialogueView = GameObject.FindWithTag("DialogueView");
         _dialogueText = GameObject.FindWithTag("DialogueText").GetComponent<Text>();
+        _typewriter = GetComponent<Typewriter>();
     }
 
     void Update()
@@ -32,6 +36,7 @@ public class DialogueManager : MonoBehaviour
 
     void StartDialogue(Dictionary<string, object> msg)
     {
+        // Debug.Log("Starting dialogue");
         _dialogueCounter = 0;
 
         SetDialogue();
@@ -55,17 +60,15 @@ public class DialogueManager : MonoBehaviour
 
     void SetDialogue()
     {
+        // Debug.Log("Setting Dialogue Phase");
         _currentDialoguePhase = GameManager.Instance.CurrentPhase.dialoguePhase;
 
-        // Typewriter.Type(_currentDialoguePhase.dialogues[_dialogueCounter], _dialogueText);
-        _dialogueText.text = _currentDialoguePhase.dialogues[_dialogueCounter];
-
+        _typewriter.Write(_currentDialoguePhase.dialogues[_dialogueCounter], _dialogueText);
     }
 
     void ShowDialogueView()
     {
         // To do - animate in?
-        Debug.Log("Starting Dialogue");
         _dialogueView.SetActive(true);
     }
 
