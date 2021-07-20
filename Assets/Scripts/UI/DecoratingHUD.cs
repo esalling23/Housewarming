@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HUD : MonoBehaviour
+/// <summary>
+/// Handles user interaction with provided UI buttons
+/// </summary>
+public class DecoratingHUD : MonoBehaviour
 {
     [SerializeField]
     Text _selectedObjText;
@@ -34,4 +37,6 @@ public class HUD : MonoBehaviour
     {
         EventManager.TriggerEvent(EventName.CycleObject, null);
     }
+
+    
 }
