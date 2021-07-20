@@ -18,13 +18,16 @@ public class WorldObject : MonoBehaviour
     [SerializeField] string _name;
 
     // Cycle style support
-    [SerializeField] List<Sprite> _spriteStyles;
+    [SerializeField] Sprite[] _spriteStyles;
     [SerializeField] SpriteRenderer _childSprite;
+    [SerializeField] Vector2 _spriteColliderOffset = Vector2.zero;
     BoxCollider2D _boxCollider;
+    int _selectedStyleIndex;
+
+    // Support for tilemap objects
     bool _isTilemap = false;
     Tilemap _tilemap;
     TileManager _tileManager;
-    int _selectedStyleIndex;
 
     #endregion
 
@@ -77,7 +80,7 @@ public class WorldObject : MonoBehaviour
         {
             _boxCollider = GetComponent<BoxCollider2D>();
 
-            if (!_childSprite || _spriteStyles.Count == 0)
+            if (!_childSprite || _spriteStyles.Length == 0)
             {
                 Debug.LogError("WorldObject not set up properly. Check child sprite and sprite list.");
             }
@@ -100,13 +103,14 @@ public class WorldObject : MonoBehaviour
         {
             limit = _tileManager.CycleLimit;
         }
-        else if (_spriteStyles.Count == 0)
+        else if (_spriteStyles.Length == 0)
         {
+            Debug.Log("No sprites to cycle");
             return;
         }
         else
         {
-            limit = _spriteStyles.Count - 1;
+            limit = _spriteStyles.Length - 1;
         }
 
         Debug.Log($"Style cycle limit is: {limit}");
