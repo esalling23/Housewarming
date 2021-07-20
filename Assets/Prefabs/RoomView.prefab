@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7120087917506271158}
   m_Layer: 0
-  m_Name: DecoratingAreaView
-  m_TagString: Untagged
+  m_Name: RoomView
+  m_TagString: RoomView
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4957,6 +4957,7 @@ MonoBehaviour:
   _name: Flooring
   _spriteStyles: []
   _childSprite: {fileID: 0}
+  _spriteColliderOffset: {x: 0, y: 0}
 --- !u!19719996 &8653717701228264723
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -6037,6 +6038,7 @@ MonoBehaviour:
   _name: 
   _spriteStyles: []
   _childSprite: {fileID: 0}
+  _spriteColliderOffset: {x: 0, y: 0}
 --- !u!114 &8653717701462064458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6065,8 +6067,8 @@ GameObject:
   - component: {fileID: 8653717701698798973}
   - component: {fileID: 8653717701698798969}
   m_Layer: 5
-  m_Name: HUD
-  m_TagString: Untagged
+  m_Name: RoomHUD
+  m_TagString: RoomHUD
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
