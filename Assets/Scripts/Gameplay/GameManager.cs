@@ -47,6 +47,12 @@ public class GameManager : MonoBehaviour
         get { return _gameData; }
     }
 
+    public void StartGame()
+    {
+        Debug.Log("Time to start game");
+        EventManager.TriggerEvent(EventName.StartDialogue, null);
+    }
+
     void Awake()
     {
         if (!_instance)
@@ -64,16 +70,20 @@ public class GameManager : MonoBehaviour
     {
         _currentPhase = _gameData.gamePhases[0];
         _gameOver = false;
-        EventManager.TriggerEvent(EventName.StartDialogue, null);
+
         // EventManager.StartListening(EventName.CompletePhase, HandleNextPhase);
         EventManager.StartListening(EventName.CompleteDialogue, HandleDialogueComplete);
         EventManager.StartListening(EventName.CompleteArea, HandleAreaComplete);
+
+        // Temporary until game menus are built
+        StartCoroutine(TempGameStart());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator TempGameStart()
     {
+        yield return new WaitForSeconds(2f);
 
+        StartGame();
     }
 
     /// <summary>
