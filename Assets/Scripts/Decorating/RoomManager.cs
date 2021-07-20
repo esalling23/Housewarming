@@ -11,7 +11,6 @@ public class RoomManager : MonoBehaviour
     WorldObject _selected;
     BoxCollider2D _selectedCollider;
     Transform _selectedTransform;
-    TileManager _selectedTileManager;
     Dictionary <TileType, int> _tileStyleSelection;
     int _chosenTileIndex = 0;
 
@@ -81,7 +80,6 @@ public class RoomManager : MonoBehaviour
     {
         _selected = (WorldObject) msg["obj"];
         _selectedTransform = _selected.gameObject.transform;
-        _selectedTileManager = _selected.gameObject.GetComponent<TileManager>();
 
         Debug.Log(_selected);
     }
@@ -99,8 +97,7 @@ public class RoomManager : MonoBehaviour
 
         if (_selected.IsTilemap)
         {
-            _selectedTileManager = _selected.gameObject.GetComponent<TileManager>();
-            _tileStyleSelection[_selectedTileManager.Type] = _selected.SelectedStyleIndex;
+            _tileStyleSelection[_selected.TileManager.Type] = _selected.SelectedStyleIndex;
         }
     }
 }

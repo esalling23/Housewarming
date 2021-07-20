@@ -40,6 +40,18 @@ public class WorldObject : MonoBehaviour
         get { return _isTilemap; }
     }
 
+    public TileManager TileManager
+    {
+        get
+        {
+            if (IsTilemap)
+            {
+                return _tileManager;
+            }
+            return null;
+        }
+    }
+
     #endregion
 
     #region Methods
