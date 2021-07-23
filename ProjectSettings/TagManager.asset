@@ -6,6 +6,12 @@ TagManager:
   tags:
   - DialogueView
   - DialogueText
+  - DialogueLayout
+  - AreaView
+  - AreaHUD
+  - DiningTable
+  - Walls
+  - Draggables
   layers:
   - Default
   - TransparentFX
