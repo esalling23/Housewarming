@@ -5,14 +5,20 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region Fields
     // Where game phase data is created in the inspector
     [SerializeField] GameData _gameData;
     bool _gameOver;
 
     GamePhase _currentPhase;
 
+    Camera _mainCamera;
+
     // Singleton instance
     static GameManager _instance;
+    #endregion
+
+    #region Properties
     public static GameManager Instance
     {
         get
@@ -47,11 +53,13 @@ public class GameManager : MonoBehaviour
         get { return _gameData; }
     }
 
-    public void StartGame()
+    public Camera MainCamera
     {
-        Debug.Log("Time to start game");
-        EventManager.TriggerEvent(EventName.StartDialogue, null);
+        get { return _mainCamera; }
     }
+    #endregion
+
+    #region Methods
 
     void Awake()
     {
@@ -63,20 +71,34 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        _mainCamera = Camera.main;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
+        // Setup Utils
+        WorldObjectUtils.Init();
+
+        // Initial game state
         _currentPhase = _gameData.gamePhases[0];
         _gameOver = false;
 
-        // EventManager.StartListening(EventName.CompletePhase, HandleNextPhase);
+
+        // Events
         EventManager.StartListening(EventName.CompleteDialogue, HandleDialogueComplete);
         EventManager.StartListening(EventName.CompleteArea, HandleAreaComplete);
 
         // Temporary until game menus are built
         StartCoroutine(TempGameStart());
+    }
+
+    /// <summary>
+    /// Starts the game
+    /// </summary>
+    public void StartGame()
+    {
+        Debug.Log("Time to start game");
+        EventManager.TriggerEvent(EventName.StartDialogue, null);
     }
 
     IEnumerator TempGameStart()
@@ -110,7 +132,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Updates _currentPhase
+    /// Updates the current game phase
     /// </summary>
     void NextPhase()
     {
@@ -131,4 +153,5 @@ public class GameManager : MonoBehaviour
 
         EventManager.TriggerEvent(EventName.StartDialogue, null);
     }
+    #endregion
 }
