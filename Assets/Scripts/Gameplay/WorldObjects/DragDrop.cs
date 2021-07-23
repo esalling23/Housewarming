@@ -14,16 +14,14 @@ public class DragDrop : MonoBehaviour
     Vector2 _originalPos;
 
     // Drag/hover rotation pivot support
+    [SerializeField] GameObject _childObj;
+    Transform _childTransform;
     bool _isHoverRotated = false;
     int _rotateAngle = 15;
+    Vector3 _rotatePivot;
     BoxCollider2D _collider;
     float _halfHeight;
     float _halfWidth;
-    [SerializeField] GameObject _childObj;
-    Transform _childTransform;
-    Vector3 _rotatePivot;
-    Vector3 _borderVector;
-    ContactFilter2D _contactFilter = new ContactFilter2D();
 
     // Color change support
     SpriteRenderer _childSprite;
@@ -33,6 +31,10 @@ public class DragDrop : MonoBehaviour
 
     #region Properties
 
+    /// <summary>
+    /// Provides pivot for rotation which will be the bottom left corner of the sprite
+    /// </summary>
+    /// <value>Vector3 of the bottom left corner location</value>
     Vector3 RotationPivot
     {
         get
@@ -43,6 +45,10 @@ public class DragDrop : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Determines if we should handle a mouse exit by resetting the rotation etc.
+    /// </summary>
+    /// <value>boolean based on if we're already rotated or dragging the element</value>
     bool ShouldHandleMouseExit
     {
         get
@@ -51,6 +57,10 @@ public class DragDrop : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gets if we are dragging element
+    /// </summary>
+    /// <value></value>
     bool IsDragging { get { return _isDragging; } }
 
     #endregion
@@ -65,11 +75,6 @@ public class DragDrop : MonoBehaviour
 
         _childTransform = _childObj.transform;
         _childSprite = _childObj.GetComponent<SpriteRenderer>();
-
-        LayerMask layerMask = (1 << LayerMask.NameToLayer("Walls"))
-                            | (1 << LayerMask.NameToLayer("Furniture"))
-                            | (1 << LayerMask.NameToLayer("Props"));
-        _contactFilter.SetLayerMask(layerMask);
     }
 
     void Start()
@@ -91,23 +96,18 @@ public class DragDrop : MonoBehaviour
         }
     }
 
-    bool CanPlace()
-    {
-        Collider2D[] overlap = Physics2D.OverlapAreaAll(_collider.bounds.min + _borderVector, _collider.bounds.max - _borderVector, _contactFilter.layerMask);
-        if (overlap.Length > 1)
-        {
-            Debug.Log("Cannot Place");
-            Debug.Log(string.Format("Found {0} overlapping object(s)", overlap.Length - 1));
-            // Check immediately available spots around element
-            return false;
-        }
 
-        return true;
-    }
 
+    /// <summary>
+    /// Handles user releasing mouse
+    /// - Ends drag
+    /// - Stops handling collision triggers
+    /// </summary>
     void OnMouseUp()
     {
-        if (!CanPlace())
+        // Return object to original position if user tries to drop over
+        // another object
+        if (!WorldObjectUtils.CanPlace(_collider))
         {
             _transform.position = _originalPos;
             HandleMouseExit();
@@ -122,6 +122,11 @@ public class DragDrop : MonoBehaviour
         _collider.isTrigger = false;
     }
 
+
+    /// <summary>
+    /// Handles user clicking on object
+    /// - Stores original position for return to that spot if we cannot place later on
+    /// </summary>
     void OnMouseDown()
     {
         _originalPos = new Vector2(_transform.position.x, _transform.position.y);
@@ -130,6 +135,10 @@ public class DragDrop : MonoBehaviour
         _collider.isTrigger = true;
     }
 
+    /// <summary>
+    /// Handles user moving mouse away from object
+    /// - Only do something if we aren't dragging
+    /// </summary>
     void OnMouseExit()
     {
         if (ShouldHandleMouseExit)

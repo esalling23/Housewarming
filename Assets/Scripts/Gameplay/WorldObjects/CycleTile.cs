@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+/// <summary>
+/// Custom Tile object that supports cycling through different tyles based
+/// on a selection in the RoomManager
+/// </summary>
 [CreateAssetMenu(fileName = "New Cycle Tile", menuName = "Tiles/Cycle Tile")]
 
 public class CycleTile : Tile
@@ -19,13 +23,13 @@ public class CycleTile : Tile
     {
         base.GetTileData(location, tilemap, ref tileData);
 
-        Debug.Log("In GetTileData");
+        // Debug.Log("In GetTileData");
 
         if (Application.isPlaying)
         {
-            Debug.Log(RoomManager.Instance.TileStyleSelection[type]);
-            _newSprite = tiles[RoomManager.Instance.TileStyleSelection[type]];
-            Debug.Log(_newSprite);
+            // Debug.Log(RoomManager.Instance.TileStyleSelection[type]);
+            _newSprite = tiles[WorldObjectManager.Instance.TileStyleSelection[type]];
+            // Debug.Log(_newSprite);
 
             tileData.sprite = _newSprite;
         }

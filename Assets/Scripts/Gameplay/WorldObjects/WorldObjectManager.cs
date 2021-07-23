@@ -3,48 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-
-public class RoomManager : MonoBehaviour
+/// <summary>
+/// Handles room/area view and selecting of different world objects
+/// </summary>
+public class WorldObjectManager : MonoBehaviour
 {
-    TileManager[] _tileManagers;
-
+    #region Fields
+    // WorldObject selection support
     WorldObject _selected;
-    BoxCollider2D _selectedCollider;
     Transform _selectedTransform;
+
+    // Support for tile based WorldObjects
+    TileManager[] _tileManagers;
     Dictionary <TileType, int> _tileStyleSelection;
-    int _chosenTileIndex = 0;
 
-    // Singleton
-    static RoomManager _instance;
+    // Singleton instance
+    static WorldObjectManager _instance;
 
-    public static RoomManager Instance
+    #endregion
+
+    #region Properties
+
+    /// <summary>
+    /// Singleton instance property
+    /// </summary>
+    /// <value>WorldObjectManager instance object</value>
+    public static WorldObjectManager Instance
     {
         get {
             if (!_instance)
             {
-                GameObject roomManager = GameObject.Find("RoomManager");
+                WorldObjectManager objManager = GameObject.FindObjectOfType(typeof(WorldObjectManager)) as WorldObjectManager;
 
-                if (!roomManager)
+                if (!objManager)
                 {
-                    Debug.LogError("Must have one enabled RoomManager object in the scene");
+                    Debug.LogError("Must have one enabled WorldObjectManager object in the scene");
                 }
 
-                _instance = roomManager.GetComponent<RoomManager>();
+                _instance = objManager;
             }
 
             return _instance;
         }
     }
 
-    public int ChosenTileIndex
-    {
-        get { return _chosenTileIndex; }
-    }
-
+    /// <summary>
+    /// Dictionary storage of different tile types and the chosen style index for each
+    /// Allows for all tiles of a given type (floor, wall) to use the same style
+    /// </summary>
+    /// <value>Dictionary of types and selected style index</value>
     public Dictionary<TileType, int> TileStyleSelection
     {
         get { return _tileStyleSelection; }
     }
+
+    #endregion
+
+    #region Methods
 
     void Awake()
     {
@@ -57,6 +72,7 @@ public class RoomManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        // Locate all TileManagers in the scene to determine starter style for those tiles
         _tileManagers = FindObjectsOfType<TileManager>();
         _tileStyleSelection = new Dictionary<TileType, int>();
 
@@ -76,20 +92,33 @@ public class RoomManager : MonoBehaviour
         EventManager.StartListening(EventName.CycleObject, HandleCycleSelected);
     }
 
+    /// <summary>
+    /// Event handler for newly selected WorldObject in scene
+    /// Updates local references to selected object
+    /// </summary>
+    /// <param name="msg">null</param>
     void HandleUpdateSelected(Dictionary<string, object> msg)
     {
         _selected = (WorldObject) msg["obj"];
         _selectedTransform = _selected.gameObject.transform;
 
-        Debug.Log(_selected);
+        Debug.Log($"We have selected a new object: {_selected}");
     }
 
+    /// <summary>
+    /// Event handler for clicking on the rotate button
+    /// </summary>
+    /// <param name="msg">null</param>
     void HandleRotateSelected(Dictionary<string, object> msg)
     {
         Debug.Log("Rotating");
         _selectedTransform.Rotate(0, 0, 90);
     }
 
+    /// <summary>
+    /// Event handler for cycling the style of the selected WorldObject
+    /// </summary>
+    /// <param name="msg">null</param>
     void HandleCycleSelected(Dictionary<string, object> msg)
     {
         Debug.Log("Cycling");
@@ -100,4 +129,6 @@ public class RoomManager : MonoBehaviour
             _tileStyleSelection[_selected.TileManager.Type] = _selected.SelectedStyleIndex;
         }
     }
+
+    #endregion
 }

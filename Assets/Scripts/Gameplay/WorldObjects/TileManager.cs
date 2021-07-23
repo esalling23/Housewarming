@@ -2,12 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages tile type and the style cycle limit
+/// Required for WorldObjects that contain Tilemaps as their child
+/// </summary>
 public class TileManager : MonoBehaviour
 {
-    [SerializeField]
-    TileType _type;
+    #region Fields
+    [SerializeField] TileType _type;
 
     [SerializeField] int _cycleLimit;
+
+    #endregion
+
+    #region Properties
 
     public int CycleLimit
     {
@@ -18,4 +26,6 @@ public class TileManager : MonoBehaviour
     {
         get { return _type; }
     }
+
+    #endregion
 }
