@@ -12,7 +12,8 @@ public class AreaManager : MonoBehaviour
 
     AreaPhase _currentArea;
     // Various area game objects to be loaded in
-    GameObject _areaView;
+    [SerializeField] GameObject _areaView;
+    Transform _draggablesContainer;
     // Used for Food phase
     GameObject _diningTable;
     // Used to determine initial random placements of world objects
@@ -28,6 +29,7 @@ public class AreaManager : MonoBehaviour
     {
         _areaView = GameObject.FindWithTag("AreaView");
         _diningTable = GameObject.FindWithTag("DiningTable");
+        _draggablesContainer = GameObject.FindWithTag("Draggables").transform;
         _wallTiles = GameObject.FindWithTag("Walls").GetComponent<Tilemap>();
     }
 
@@ -62,7 +64,7 @@ public class AreaManager : MonoBehaviour
                         randPos.x = Random.Range(xMin, xMax);
                         randPos.y = Random.Range(yMin, yMax);
 
-                        newObject = Instantiate(worldObj, randPos, Quaternion.identity).GetComponent<BoxCollider2D>();
+                        newObject = Instantiate(worldObj, randPos, Quaternion.identity, _draggablesContainer).GetComponent<BoxCollider2D>();
                     }
                     while (newObject && !WorldObjectUtils.CanPlace(newObject));
                 }
