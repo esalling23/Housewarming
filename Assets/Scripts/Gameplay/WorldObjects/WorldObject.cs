@@ -5,154 +5,62 @@ using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// Manages WorldObject prefab - supports both sprite and tilemap child objects
-///
-/// - Style cycle (sprite change)
-/// - Collider size
+/// WorldObject fundamental functionality - baseclass
 /// </summary>
-public class WorldObject : MonoBehaviour
+public class WorldObject : MonoBehaviour, IWorldObject
 {
     #region Fields
 
     // Object details for display
-    [SerializeField] string _name;
+    [SerializeField] protected string _name;
+    [SerializeField] protected WorldObjectType _type;
 
     // Cycle style support
-    [SerializeField] Sprite[] _spriteStyles;
-    [SerializeField] SpriteRenderer _childSprite;
-    [SerializeField] Vector2 _spriteColliderOffset = Vector2.zero;
-    BoxCollider2D _boxCollider;
-    int _selectedStyleIndex;
-
-    // Support for tilemap objects
-    bool _isTilemap = false;
-    Tilemap _tilemap;
-    TileManager _tileManager;
+    protected int _selectedStyleIndex;
 
     #endregion
 
     #region Properties
+
+    public string Name
+    {
+        get { return _name; }
+    }
 
     public int SelectedStyleIndex
     {
         get { return _selectedStyleIndex; }
     }
 
-    public bool IsTilemap
+    public WorldObjectType Type
     {
-        get { return _isTilemap; }
-    }
-
-    public TileManager TileManager
-    {
-        get
-        {
-            if (IsTilemap)
-            {
-                return _tileManager;
-            }
-            return null;
-        }
+        get { return _type; }
     }
 
     #endregion
 
     #region Methods
 
-    void Awake()
+    /// <summary>
+    /// Changes the visual of the object based on different styles
+    /// </summary>
+    public virtual void CycleStyle()
     {
-        _tilemap = GetComponent<Tilemap>();
-
-        Debug.Log(_tilemap);
-
-        if (_tilemap != null)
-        {
-            _isTilemap = true;
-
-            if (!TryGetComponent(out TileManager _tileManager))
-            {
-                Debug.LogError("WorldObject with Tilemap child must have TileManager component");
-            }
-        }
-        else
-        {
-            _boxCollider = GetComponent<BoxCollider2D>();
-
-            if (!_childSprite || _spriteStyles.Length == 0)
-            {
-                Debug.LogError("WorldObject not set up properly. Check child sprite and sprite list.");
-            }
-            else if (_boxCollider == null)
-            {
-                Debug.LogError("WorldObject not set up properly. Object should have BoxCollider2D component");
-            }
-
-            _childSprite.sprite = _spriteStyles[0];
-
-            SetColliderToSpriteSize();
-        }
+        Debug.Log("Whoops we're in the base class CycleStyle");
     }
 
-    public void CycleStyle()
-    {
-        int limit = 0;
-
-        if (_isTilemap)
-        {
-            limit = _tileManager.CycleLimit;
-        }
-        else if (_spriteStyles.Length == 0)
-        {
-            Debug.Log("No sprites to cycle");
-            return;
-        }
-        else
-        {
-            limit = _spriteStyles.Length - 1;
-        }
-
-        Debug.Log($"Style cycle limit is: {limit}");
-
-        if (_selectedStyleIndex < limit)
-        {
-            _selectedStyleIndex++;
-        }
-        else if (_selectedStyleIndex >= limit)
-        {
-            _selectedStyleIndex = 0;
-        }
-
-        Debug.Log($"Selected style index is: {_selectedStyleIndex}");
-
-        if (_isTilemap)
-        {
-            _tilemap.RefreshAllTiles();
-        }
-        else
-        {
-            _childSprite.sprite = _spriteStyles[_selectedStyleIndex];
-
-            SetColliderToSpriteSize();
-        }
-
-    }
-
+    /// <summary>
+    /// Selects the object on mouse click
+    /// </summary>
     void OnMouseDown() {
         // Ignore UI elements
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             EventManager.TriggerEvent(EventName.SelectObject, new Dictionary<string, object> {
-                { "name", _name },
                 { "obj", this }
             });
         }
     }
 
-    void SetColliderToSpriteSize()
-    {
-        Vector3 spriteBounds = _childSprite.bounds.size;
-        _boxCollider.size = spriteBounds;
-        _boxCollider.offset = _spriteColliderOffset;
-    }
     #endregion
 }
