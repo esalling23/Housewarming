@@ -14,7 +14,6 @@ public class Typewriter: MonoBehaviour
 
     public void Write(string text, Text textObject)
     {
-        Debug.Log("Writing");
         if (_typeCoroutine != null)
         {
             StopCoroutine(_typeCoroutine);
@@ -29,7 +28,6 @@ public class Typewriter: MonoBehaviour
         WaitForSeconds typeWait = new WaitForSeconds(_speed);
         foreach (char c in text)
         {
-            Debug.Log("Adding a letter");
             textObject.text = textObject.text + c;
             yield return typeWait;
         }
