@@ -67,6 +67,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            _typewriter.StopWriting();
             _dialogueView.SetActive(false);
             EventManager.TriggerEvent(EventName.CompleteDialogue, null);
         }
