@@ -50,5 +50,30 @@ public static class WorldObjectUtils
         return true;
     }
 
+    public static int GetNextStyleIndex(int currIndex, int limit)
+    {
+        if (currIndex < limit)
+        {
+            currIndex++;
+        }
+        else
+        {
+            currIndex = 0;
+        }
+
+        return currIndex;
+    }
+
+    public static Vector3 GetRandomPos(BoundsInt bounds, Vector3 randPos)
+    {
+        float xMin = bounds.xMin;
+        float xMax = bounds.xMax;
+        float yMin = bounds.yMin;
+        float yMax = bounds.yMax;
+
+        randPos.x = Random.Range(xMin, xMax);
+        randPos.y = Random.Range(yMin, yMax);
+        return randPos;
+    }
     #endregion
 }
