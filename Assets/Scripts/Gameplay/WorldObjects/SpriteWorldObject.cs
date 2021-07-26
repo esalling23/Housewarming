@@ -5,10 +5,12 @@ using UnityEngine;
 public class SpriteWorldObject : WorldObject
 {
     #region Fields
+    // All sprites should be the same size
     [SerializeField] Sprite[] _spriteStyles;
     [SerializeField] SpriteRenderer _childSprite;
     [SerializeField] Vector2 _spriteColliderOffset = Vector2.zero;
     BoxCollider2D _boxCollider;
+    Transform _transform;
 
     #endregion
 
@@ -16,6 +18,7 @@ public class SpriteWorldObject : WorldObject
     void Awake()
     {
         _boxCollider = GetComponent<BoxCollider2D>();
+        _transform = gameObject.transform;
 
         if (!_childSprite || _spriteStyles.Length == 0)
         {
@@ -29,8 +32,8 @@ public class SpriteWorldObject : WorldObject
 
     void Start()
     {
-        _childSprite.sprite = _spriteStyles[0];
-
+        _selectedStyleIndex = 0;
+        SetSprite();
         SetColliderToSpriteSize();
     }
 
@@ -44,9 +47,13 @@ public class SpriteWorldObject : WorldObject
             Debug.Log("No sprites to cycle");
             return;
         }
-        WorldObjectUtils.GetNextStyleIndex(_selectedStyleIndex, _spriteStyles.Length - 1);
+        _selectedStyleIndex = WorldObjectUtils.GetNextStyleIndex(_selectedStyleIndex, _spriteStyles.Length - 1);
+        SetSprite();
+    }
+
+    void SetSprite()
+    {
         _childSprite.sprite = _spriteStyles[_selectedStyleIndex];
-        SetColliderToSpriteSize();
     }
 
     void SetColliderToSpriteSize()
