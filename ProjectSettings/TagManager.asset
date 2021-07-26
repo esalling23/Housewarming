@@ -12,6 +12,8 @@ TagManager:
   - DiningTable
   - Walls
   - Draggables
+  - RotateButton
+  - CycleButton
   layers:
   - Default
   - TransparentFX
