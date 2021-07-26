@@ -10,12 +10,8 @@ public class WorldObjectManager : MonoBehaviour
 {
     #region Fields
     // WorldObject selection support
-    WorldObject _selected;
+    IWorldObject _selected;
     Transform _selectedTransform;
-
-    // Support for tile based WorldObjects
-    TileManager[] _tileManagers;
-    Dictionary <TileType, int> _tileStyleSelection;
 
     // Singleton instance
     static WorldObjectManager _instance;
@@ -47,15 +43,11 @@ public class WorldObjectManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Dictionary storage of different tile types and the chosen style index for each
-    /// Allows for all tiles of a given type (floor, wall) to use the same style
-    /// </summary>
-    /// <value>Dictionary of types and selected style index</value>
-    public Dictionary<TileType, int> TileStyleSelection
+    public IWorldObject SelectedObject
     {
-        get { return _tileStyleSelection; }
+        get { return _selected; }
     }
+
 
     #endregion
 
@@ -70,18 +62,6 @@ public class WorldObjectManager : MonoBehaviour
         else if (_instance != this)
         {
             Destroy(gameObject);
-        }
-
-        // Locate all TileManagers in the scene to determine starter style for those tiles
-        _tileManagers = FindObjectsOfType<TileManager>();
-        _tileStyleSelection = new Dictionary<TileType, int>();
-
-        foreach (TileManager manager in _tileManagers)
-        {
-            // Debug.Log(manager.Type);
-            WorldObject worldObject = manager.gameObject.GetComponent<WorldObject>();
-            // Debug.Log(worldObject.SelectedStyleIndex);
-            _tileStyleSelection.Add(manager.Type, worldObject.SelectedStyleIndex);
         }
     }
 
@@ -99,8 +79,9 @@ public class WorldObjectManager : MonoBehaviour
     /// <param name="msg">null</param>
     void HandleUpdateSelected(Dictionary<string, object> msg)
     {
-        _selected = (WorldObject) msg["obj"];
-        _selectedTransform = _selected.gameObject.transform;
+        _selected = (IWorldObject) msg["obj"];
+        WorldObject obj = (WorldObject) _selected;
+        _selectedTransform = obj.gameObject.transform;
 
         Debug.Log($"We have selected a new object: {_selected}");
     }
@@ -123,11 +104,6 @@ public class WorldObjectManager : MonoBehaviour
     {
         Debug.Log("Cycling");
         _selected.CycleStyle();
-
-        if (_selected.IsTilemap)
-        {
-            _tileStyleSelection[_selected.TileManager.Type] = _selected.SelectedStyleIndex;
-        }
     }
 
     #endregion
