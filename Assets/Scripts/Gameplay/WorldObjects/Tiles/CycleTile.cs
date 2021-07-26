@@ -28,7 +28,7 @@ public class CycleTile : Tile
         if (Application.isPlaying)
         {
             // Debug.Log(RoomManager.Instance.TileStyleSelection[type]);
-            _newSprite = tiles[WorldObjectManager.Instance.TileStyleSelection[type]];
+            _newSprite = tiles[TileManager.Instance.TileStyleSelection[type]];
             // Debug.Log(_newSprite);
 
             tileData.sprite = _newSprite;
