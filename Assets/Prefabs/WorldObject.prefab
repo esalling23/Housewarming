@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2449816464885966685}
   - component: {fileID: 5085472777420733552}
   - component: {fileID: 5085472777420733555}
-  - component: {fileID: 1198744053669864135}
+  - component: {fileID: 5607357562908191811}
   m_Layer: 7
   m_Name: WorldObject
   m_TagString: Untagged
@@ -78,7 +78,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.25}
   m_EdgeRadius: 0
---- !u!114 &1198744053669864135
+--- !u!114 &5607357562908191811
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,12 +87,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5085472777420733551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c33691474e80421285114b351f08326, type: 3}
+  m_Script: {fileID: 11500000, guid: 8204132360f714540a4124facd73d27d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: World Object
-  _spriteStyles: []
+  _name: WorldObject
+  _type: 0
+  _spriteStyles:
+  - {fileID: 1233381392870721423, guid: 3096c38d37c564fc682147c833f5539b, type: 3}
+  - {fileID: 671010282010775086, guid: 3096c38d37c564fc682147c833f5539b, type: 3}
+  - {fileID: -5705065506626769016, guid: 3096c38d37c564fc682147c833f5539b, type: 3}
   _childSprite: {fileID: 7938728430270355261}
+  _spriteColliderOffset: {x: 0, y: 0}
 --- !u!1 &6663722201335252845
 GameObject:
   m_ObjectHideFlags: 0

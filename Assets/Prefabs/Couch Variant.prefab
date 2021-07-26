@@ -1,68 +1,12 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &421972680181361676
+--- !u!1001 &3870424514496393509
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: name
-      value: Dining chair
-      objectReference: {fileID: 0}
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: _name
-      value: Dining Chair
-      objectReference: {fileID: 0}
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: _childSprite
-      value: 
-      objectReference: {fileID: 7779724919913200433}
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: _spriteColliderOffset.x
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: spriteStyles.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: _spriteStyles.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: spriteStyles.Array.data[0]
-      value: 
-      objectReference: {fileID: 3505931874408844845, guid: 70dcbcfd56dd44b5e8931a174978a505, type: 3}
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: spriteStyles.Array.data[1]
-      value: 
-      objectReference: {fileID: 484721041522162978, guid: 70dcbcfd56dd44b5e8931a174978a505, type: 3}
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: spriteStyles.Array.data[2]
-      value: 
-      objectReference: {fileID: 2883652986060550806, guid: 70dcbcfd56dd44b5e8931a174978a505, type: 3}
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: spriteStyles.Array.data[3]
-      value: 
-      objectReference: {fileID: 5221586883235957165, guid: 70dcbcfd56dd44b5e8931a174978a505, type: 3}
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: _spriteStyles.Array.data[0]
-      value: 
-      objectReference: {fileID: 484721041522162978, guid: 70dcbcfd56dd44b5e8931a174978a505, type: 3}
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: _spriteStyles.Array.data[1]
-      value: 
-      objectReference: {fileID: 3505931874408844845, guid: 70dcbcfd56dd44b5e8931a174978a505, type: 3}
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: _spriteStyles.Array.data[2]
-      value: 
-      objectReference: {fileID: 2883652986060550806, guid: 70dcbcfd56dd44b5e8931a174978a505, type: 3}
-    - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: _spriteStyles.Array.data[3]
-      value: 
-      objectReference: {fileID: 5221586883235957165, guid: 70dcbcfd56dd44b5e8931a174978a505, type: 3}
     - target: {fileID: 2449816464885966685, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -109,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2449816464885966685, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2449816464885966685, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -129,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2449816464885966685, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2449816464885966685, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -149,36 +93,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5085472777420733551, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_Name
-      value: DiningTable Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 5085472777420733551, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: m_TagString
-      value: DiningTable
+      value: Couch Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5607357562908191811, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: _name
-      value: Dining Table
-      objectReference: {fileID: 0}
-    - target: {fileID: 5607357562908191811, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-      propertyPath: _spriteStyles.Array.size
-      value: 1
+      value: Couch
       objectReference: {fileID: 0}
     - target: {fileID: 5607357562908191811, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: _spriteStyles.Array.data[0]
       value: 
-      objectReference: {fileID: -7392282906772063792, guid: 3096c38d37c564fc682147c833f5539b, type: 3}
+      objectReference: {fileID: 8449741267848733203, guid: 3096c38d37c564fc682147c833f5539b, type: 3}
     - target: {fileID: 5607357562908191811, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: _spriteStyles.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -1199757757228686340, guid: 3096c38d37c564fc682147c833f5539b, type: 3}
+    - target: {fileID: 5607357562908191811, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
+      propertyPath: _spriteStyles.Array.data[2]
+      value: 
+      objectReference: {fileID: -7047216810487833965, guid: 3096c38d37c564fc682147c833f5539b, type: 3}
     - target: {fileID: 7938728430270355261, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -7392282906772063792, guid: 3096c38d37c564fc682147c833f5539b, type: 3}
+      objectReference: {fileID: 8449741267848733203, guid: 3096c38d37c564fc682147c833f5539b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
---- !u!212 &7779724919913200433 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 7938728430270355261, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
-  m_PrefabInstance: {fileID: 421972680181361676}
-  m_PrefabAsset: {fileID: 0}
