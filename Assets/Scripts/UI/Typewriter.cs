@@ -14,10 +14,7 @@ public class Typewriter: MonoBehaviour
 
     public void Write(string text, Text textObject)
     {
-        if (_typeCoroutine != null)
-        {
-            StopCoroutine(_typeCoroutine);
-        }
+        StopWriting();
 
         textObject.text = "";
         _typeCoroutine = StartCoroutine(Type(text, textObject));
@@ -30,6 +27,14 @@ public class Typewriter: MonoBehaviour
         {
             textObject.text = textObject.text + c;
             yield return typeWait;
+        }
+    }
+
+    public void StopWriting()
+    {
+        if (_typeCoroutine != null)
+        {
+            StopCoroutine(_typeCoroutine);
         }
     }
 }
