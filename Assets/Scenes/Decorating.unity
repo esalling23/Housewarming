@@ -2081,6 +2081,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightHUD
       objectReference: {fileID: 0}
+    - target: {fileID: 8653717701228264726, guid: fccd3ab04beda4bda876a985ec1de035, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8653717701228264727, guid: fccd3ab04beda4bda876a985ec1de035, type: 3}
       propertyPath: m_ChunkCullingBounds.x
       value: 0
@@ -7588,6 +7592,10 @@ PrefabInstance:
     - target: {fileID: 8653717701462064461, guid: fccd3ab04beda4bda876a985ec1de035, type: 3}
       propertyPath: m_ChunkCullingBounds.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8653717701462064463, guid: fccd3ab04beda4bda876a985ec1de035, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8653717701462064496, guid: fccd3ab04beda4bda876a985ec1de035, type: 3}
       propertyPath: m_Layer
