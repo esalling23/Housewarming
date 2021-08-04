@@ -4,22 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Handles user interaction with provided UI buttons in Decorating Phase
+/// Handles user interaction with provided UI buttons in Area portion of each phase
 /// </summary>
 public class AreaHUD : MonoBehaviour
 {
     #region Fields
     [SerializeField] Text _selectedObjText;
     [SerializeField] GameObject _confirmPrompt;
-    GameObject _areaHUD;
+    [SerializeField] Button _cycleButton;
+    [SerializeField] Button _rotateButton;
     #endregion
 
     #region Methods
-
-    void Awake()
-    {
-        _areaHUD = GameObject.FindWithTag("AreaHUD");
-    }
 
     void Start()
     {
@@ -34,7 +30,7 @@ public class AreaHUD : MonoBehaviour
     /// <param name="msg"></param>
     void ShowHUD(Dictionary<string, object> msg)
     {
-        _areaHUD.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -42,7 +38,7 @@ public class AreaHUD : MonoBehaviour
     /// </summary>
     void CloseHUD()
     {
-        _areaHUD.SetActive(false);
+        gameObject.SetActive(false);
         _confirmPrompt.SetActive(false);
     }
 
@@ -52,8 +48,30 @@ public class AreaHUD : MonoBehaviour
     /// <param name="msg"></param>
     void UpdateSelectedObject(Dictionary<string, object> msg)
     {
-        Debug.Log($"Selected {msg["name"]}");
-        _selectedObjText.text = "Selected: " + msg["name"].ToString();
+        Debug.Log($"Selected {msg}");
+        IWorldObject obj = (IWorldObject) msg["obj"];
+        _selectedObjText.text = "Selected: " + obj.Name;
+
+        // Display options for this type of object
+        DisplayObjectOptionBtns(obj.Type);
+    }
+
+    /// <summary>
+    /// Sets the buttons to display for world object options
+    /// </summary>
+    /// <param name="type">Type of world object to display buttons for</param>
+    void DisplayObjectOptionBtns(WorldObjectType type)
+    {
+        switch (type)
+        {
+            case WorldObjectType.Tile:
+                _rotateButton.gameObject.SetActive(false);
+            break;
+
+            case WorldObjectType.Sprite:
+                _rotateButton.gameObject.SetActive(true);
+            break;
+        }
     }
 
     /// <summary>
