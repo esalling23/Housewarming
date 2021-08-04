@@ -16,7 +16,7 @@ public class DragDrop : MonoBehaviour
     [SerializeField] GameObject _childObj;
     Transform _childTransform;
     bool _isHoverRotated = false;
-    int _rotateAngle = 15;
+    int _rotateAngle = 2;
     Vector3 _rotatePivot;
     BoxCollider2D _collider;
     float _halfHeight;
