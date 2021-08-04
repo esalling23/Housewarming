@@ -7,7 +7,6 @@ public class DragDrop : MonoBehaviour
     #region Fields
     // Caching built-ins
     Transform _transform;
-    Camera _mainCamera;
 
     // Drag support
     bool _isDragging = false;
@@ -70,7 +69,6 @@ public class DragDrop : MonoBehaviour
     void Awake()
     {
         _transform = transform;
-        _mainCamera = Camera.main;
         _collider = GetComponent<BoxCollider2D>();
 
         _childTransform = _childObj.transform;
@@ -87,7 +85,7 @@ public class DragDrop : MonoBehaviour
     {
         if (IsDragging)
         {
-            Vector2 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition) - _transform.position;
+            Vector2 mousePos = GameManager.Instance.MainCamera.ScreenToWorldPoint(Input.mousePosition) - _transform.position;
             // Rounding position forces grid-snap
             mousePos.x = Mathf.RoundToInt(mousePos.x);
             mousePos.y = Mathf.RoundToInt(mousePos.y);
