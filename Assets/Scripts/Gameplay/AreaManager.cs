@@ -20,6 +20,7 @@ public class AreaManager : MonoBehaviour
     Tilemap _wallTiles;
     [SerializeField] GameObject[] _worldObjects;
     [SerializeField] GameObject[] _plateObjects;
+    Vector3 _randPos = new Vector3();
 
     #endregion
 
@@ -48,26 +49,9 @@ public class AreaManager : MonoBehaviour
         switch (GameManager.Instance.CurrentPhase.phase)
         {
             case GamePhaseName.Decorating:
-                // Instantiate & place objects for decorating phase
-                foreach (GameObject worldObj in _worldObjects)
-                {
-                    Vector3 randPos = new Vector3();
-                    BoxCollider2D newObject;
 
-                    float xMin = _wallTiles.cellBounds.xMin;
-                    float xMax = _wallTiles.cellBounds.xMax;
-                    float yMin = _wallTiles.cellBounds.yMin;
-                    float yMax = _wallTiles.cellBounds.yMax;
-
-                    do
-                    {
-                        randPos.x = Random.Range(xMin, xMax);
-                        randPos.y = Random.Range(yMin, yMax);
-
-                        newObject = Instantiate(worldObj, randPos, Quaternion.identity, _draggablesContainer).GetComponent<BoxCollider2D>();
-                    }
-                    while (newObject && !WorldObjectUtils.CanPlace(newObject));
-                }
+                // Maybe: random placement
+                // PlaceWorldObjects();
 
             break;
 
@@ -87,6 +71,32 @@ public class AreaManager : MonoBehaviour
 
 
         }
+    }
+
+    void PlaceWorldObjects()
+    {
+        BoxCollider2D newObject;
+        // Instantiate & place objects for decorating phase
+        foreach (GameObject worldObj in _worldObjects)
+        {
+            SetRandomPos();
+            newObject = Instantiate(worldObj, _randPos, Quaternion.identity, _draggablesContainer).GetComponent<BoxCollider2D>();
+
+            if (!WorldObjectUtils.CanPlace(newObject))
+            {
+                Debug.Log("Placing again");
+                SetRandomPos();
+                newObject.gameObject.transform.position = _randPos;
+                Debug.Log("Good place: " + WorldObjectUtils.CanPlace(newObject).ToString());
+            }
+        }
+    }
+
+    void SetRandomPos()
+    {
+        _randPos = WorldObjectUtils.GetRandomPos(_wallTiles.cellBounds, _randPos);
+        _randPos.x = Mathf.RoundToInt(_randPos.x);
+        _randPos.y = Mathf.RoundToInt(_randPos.y);
     }
     #endregion
 }
