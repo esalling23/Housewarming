@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Manages WorldObject prefab - supports both sprite & tilemap child objects
+///
+/// - Style cycle (sprite change)
+/// - Collider size
+/// </summary>
 public class WorldObject : MonoBehaviour
 {
     #region Fields
@@ -14,6 +20,7 @@ public class WorldObject : MonoBehaviour
     // Cycle style support
     [SerializeField] List<Sprite> _spriteStyles;
     [SerializeField] SpriteRenderer _childSprite;
+    BoxCollider2D _boxCollider;
     bool _isTilemap = false;
     Tilemap _tilemap;
     TileManager _tileManager;
@@ -32,6 +39,7 @@ public class WorldObject : MonoBehaviour
     {
         get { return _isTilemap; }
     }
+
     #endregion
 
     #region Methods
@@ -55,11 +63,20 @@ public class WorldObject : MonoBehaviour
         }
         else
         {
+            _boxCollider = GetComponent<BoxCollider2D>();
+
             if (!_childSprite || _spriteStyles.Count == 0)
             {
                 Debug.LogError("WorldObject not set up properly. Check child sprite and sprite list.");
             }
+            else if (!_boxCollider)
+            {
+                Debug.LogError("WorldObject not set up properly. Object should have BoxCollider2D component");
+            }
+
             _childSprite.sprite = _spriteStyles[0];
+
+            SetColliderToSpriteSize();
         }
     }
 
@@ -100,6 +117,8 @@ public class WorldObject : MonoBehaviour
         else
         {
             _childSprite.sprite = _spriteStyles[_selectedStyleIndex];
+
+            SetColliderToSpriteSize();
         }
 
     }
@@ -113,6 +132,13 @@ public class WorldObject : MonoBehaviour
                 { "obj", this }
             });
         }
+    }
+
+    void SetColliderToSpriteSize()
+    {
+        Vector3 spriteBounds = _childSprite.bounds.size;
+        _boxCollider.size = spriteBounds;
+        // _boxCollider.offset = new Vector2(spriteBounds.x / 2, 0);
     }
 
     #endregion

@@ -423,7 +423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2449816464885966685, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2449816464885966685, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -443,7 +443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2449816464885966685, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2449816464885966685, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1228,7 +1228,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1175667987}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 797096115}
@@ -6628,7 +6628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: _name
-      value: Dining Chair
+      value: Armchair
       objectReference: {fileID: 0}
     - target: {fileID: 1198744053669864135, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: _childSprite
@@ -6724,7 +6724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2449816464885966685, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2449816464885966685, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_LocalRotation.w
