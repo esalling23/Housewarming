@@ -9,13 +9,20 @@ using UnityEngine.UI;
 public class AreaHUD : MonoBehaviour
 {
     #region Fields
+
     [SerializeField] Text _selectedObjText;
-    [SerializeField] GameObject _confirmPrompt;
     [SerializeField] Button _cycleButton;
     [SerializeField] Button _rotateButton;
+    HUDAnimator _animator;
+
     #endregion
 
     #region Methods
+
+    private void Awake()
+    {
+        _animator = GetComponent<HUDAnimator>();
+    }
 
     void Start()
     {
@@ -30,7 +37,7 @@ public class AreaHUD : MonoBehaviour
     /// <param name="msg"></param>
     void ShowHUD(Dictionary<string, object> msg)
     {
-        gameObject.SetActive(true);
+        _animator.AnimateHUDIn();
     }
 
     /// <summary>
@@ -38,8 +45,7 @@ public class AreaHUD : MonoBehaviour
     /// </summary>
     void CloseHUD()
     {
-        gameObject.SetActive(false);
-        _confirmPrompt.SetActive(false);
+        _animator.AnimateHUDOut();
     }
 
     /// <summary>
@@ -96,8 +102,8 @@ public class AreaHUD : MonoBehaviour
     /// </summary>
     public void HandleContinueAreaBtnClick()
     {
-        // To Do: Animate
-        _confirmPrompt.SetActive(true);
+        _animator.AnimateConfirmPromptIn();
+        _animator.AnimateOptionBtnsOut();
     }
 
     /// <summary>
@@ -114,7 +120,8 @@ public class AreaHUD : MonoBehaviour
     /// </summary>
     public void HandleCancelContinueAreaBtnClick()
     {
-        _confirmPrompt.SetActive(false);
+        _animator.AnimateConfirmPromptOut();
+        _animator.AnimateOptionBtnsIn();
     }
 
     #endregion
