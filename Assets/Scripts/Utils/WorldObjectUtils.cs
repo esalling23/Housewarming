@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public static class WorldObjectUtils
 {
     #region Fields
     static ContactFilter2D _contactFilter = new ContactFilter2D();
-
     #endregion
 
     #region Properties
@@ -20,6 +20,14 @@ public static class WorldObjectUtils
         {
             return _contactFilter.layerMask;
         }
+    }
+
+    /// <summary>
+    /// Is the mouse over a UI element or a world object?
+    /// </summary>
+    public static bool IsOverUI
+    {
+        get { return EventSystem.current.IsPointerOverGameObject(); }
     }
 
     #endregion
