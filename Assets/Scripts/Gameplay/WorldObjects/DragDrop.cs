@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DragDrop : MonoBehaviour
@@ -52,7 +50,7 @@ public class DragDrop : MonoBehaviour
     {
         get
         {
-            return _isHoverRotated && !IsDragging;
+            return !WorldObjectUtils.IsOverUI && _isHoverRotated && !IsDragging;
         }
     }
 
@@ -94,8 +92,6 @@ public class DragDrop : MonoBehaviour
         }
     }
 
-
-
     /// <summary>
     /// Handles user releasing mouse
     /// - Ends drag
@@ -127,10 +123,13 @@ public class DragDrop : MonoBehaviour
     /// </summary>
     void OnMouseDown()
     {
-        _originalPos = new Vector2(_transform.position.x, _transform.position.y);
+        if (!WorldObjectUtils.IsOverUI)
+        {
+            _originalPos = new Vector2(_transform.position.x, _transform.position.y);
 
-        _isDragging = true;
-        _collider.isTrigger = true;
+            _isDragging = true;
+            _collider.isTrigger = true;
+        }
     }
 
     /// <summary>
@@ -145,14 +144,20 @@ public class DragDrop : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles user moving mouse over object
+    /// </summary>
     void OnMouseEnter()
     {
-        if (!IsDragging)
+        if (!WorldObjectUtils.IsOverUI && !IsDragging)
         {
             HandleMouseEnter();
         }
     }
 
+    /// <summary>
+    /// Logical steps for drag-hover effect
+    /// </summary>
     void HandleMouseEnter()
     {
         _isHoverRotated = true;
@@ -161,9 +166,11 @@ public class DragDrop : MonoBehaviour
         _childSprite.color = _hoverColor;
     }
 
+    /// <summary>
+    /// Logical steps for removing drag-hover effect
+    /// </summary>
     void HandleMouseExit()
     {
-        Debug.Log("Handling Exit");
         _isHoverRotated = false;
         // Reset rotate
         _childTransform.RotateAround(RotationPivot, Vector3.forward, -_rotateAngle);
@@ -171,5 +178,6 @@ public class DragDrop : MonoBehaviour
         // Reset color
         _childSprite.color = Color.white;
     }
+
     #endregion
 }
