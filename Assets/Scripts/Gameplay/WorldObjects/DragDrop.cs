@@ -60,6 +60,11 @@ public class DragDrop : MonoBehaviour
     /// <value></value>
     bool IsDragging { get { return _isDragging; } }
 
+    /// <summary>
+    /// Returns if script is disabled
+    /// </summary>
+    bool IsDisabled { get { return !this.enabled; } }
+
     #endregion
 
     #region Methods
@@ -99,6 +104,7 @@ public class DragDrop : MonoBehaviour
     /// </summary>
     void OnMouseUp()
     {
+        if (IsDisabled) return;
         // Return object to original position if user tries to drop over
         // another object
         if (!WorldObjectUtils.CanPlace(_collider))
@@ -123,6 +129,8 @@ public class DragDrop : MonoBehaviour
     /// </summary>
     void OnMouseDown()
     {
+        if (IsDisabled) return;
+
         if (!WorldObjectUtils.IsOverUI)
         {
             _originalPos = new Vector2(_transform.position.x, _transform.position.y);
@@ -138,6 +146,8 @@ public class DragDrop : MonoBehaviour
     /// </summary>
     void OnMouseExit()
     {
+        if (IsDisabled) return;
+
         if (ShouldHandleMouseExit)
         {
             HandleMouseExit();
@@ -149,6 +159,8 @@ public class DragDrop : MonoBehaviour
     /// </summary>
     void OnMouseEnter()
     {
+        if (IsDisabled) return;
+
         if (!WorldObjectUtils.IsOverUI && !IsDragging)
         {
             HandleMouseEnter();
