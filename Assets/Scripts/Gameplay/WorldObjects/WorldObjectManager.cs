@@ -67,17 +67,17 @@ public class WorldObjectManager : MonoBehaviour
 
     void Start()
     {
-        EventManager.StartListening(EventName.SelectObject, HandleUpdateSelected);
-        EventManager.StartListening(EventName.RotateObject, HandleRotateSelected);
-        EventManager.StartListening(EventName.CycleObject, HandleCycleSelected);
+        EventManager.StartListening(EventName.SelectObject, HandleSelectObjectEvent);
+        EventManager.StartListening(EventName.RotateObject, HandleRotateObjectEvent);
+        EventManager.StartListening(EventName.CycleObject, HandleCycleObjectEvent);
     }
 
     /// <summary>
     /// Event handler for newly selected WorldObject in scene
     /// Updates local references to selected object
     /// </summary>
-    /// <param name="msg">null</param>
-    void HandleUpdateSelected(Dictionary<string, object> msg)
+    /// <param name="msg">selected IWorldObject</param>
+    void HandleSelectObjectEvent(Dictionary<string, object> msg)
     {
         _selected = (IWorldObject) msg["obj"];
         WorldObject obj = (WorldObject) _selected;
@@ -90,7 +90,7 @@ public class WorldObjectManager : MonoBehaviour
     /// Event handler for clicking on the rotate button
     /// </summary>
     /// <param name="msg">null</param>
-    void HandleRotateSelected(Dictionary<string, object> msg)
+    void HandleRotateObjectEvent(Dictionary<string, object> msg)
     {
         Debug.Log("Rotating");
         _selectedTransform.Rotate(0, 0, 90);
@@ -100,7 +100,7 @@ public class WorldObjectManager : MonoBehaviour
     /// Event handler for cycling the style of the selected WorldObject
     /// </summary>
     /// <param name="msg">null</param>
-    void HandleCycleSelected(Dictionary<string, object> msg)
+    void HandleCycleObjectEvent(Dictionary<string, object> msg)
     {
         Debug.Log("Cycling");
         _selected.CycleStyle();
