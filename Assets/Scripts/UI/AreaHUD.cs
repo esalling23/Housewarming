@@ -51,7 +51,7 @@ public class AreaHUD : MonoBehaviour
     /// <summary>
     /// Event handler - Updates UI with name of selected object
     /// </summary>
-    /// <param name="msg"></param>
+    /// <param name="msg">Selected IWorldObject</param>
     void UpdateSelectedObject(Dictionary<string, object> msg)
     {
         Debug.Log($"Selected {msg}");
