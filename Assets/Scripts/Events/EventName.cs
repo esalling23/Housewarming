@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public enum EventName
 {
+    EnableObjectSelect,
     SelectObject,
     RotateObject,
     CycleObject,

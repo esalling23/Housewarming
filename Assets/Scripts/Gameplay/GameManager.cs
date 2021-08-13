@@ -98,6 +98,13 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("Time to start game");
+        // Disable all selection to start
+        EventManager.TriggerEvent(EventName.EnableObjectSelect, new Dictionary<string, object>
+        {
+            { "clear", true },
+            // Empty array to disable all
+            { "types", new WorldObjectType[] { } }
+        });
         EventManager.TriggerEvent(EventName.StartDialogue, null);
     }
 

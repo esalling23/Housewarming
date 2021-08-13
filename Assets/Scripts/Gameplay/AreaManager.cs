@@ -52,10 +52,21 @@ public class AreaManager : MonoBehaviour
 
                 // Maybe: random placement
                 // PlaceWorldObjects();
+                EventManager.TriggerEvent(EventName.EnableObjectSelect, new Dictionary<string, object>
+                {
+                    { "types", new WorldObjectType[] { WorldObjectType.Sprite, WorldObjectType.Tile } },
+                    { "clear", true }
+                });
 
             break;
 
             case GamePhaseName.Food:
+
+                EventManager.TriggerEvent(EventName.EnableObjectSelect, new Dictionary<string, object>
+                {
+                    { "types", new WorldObjectType[] { WorldObjectType.Food } },
+                    { "clear", true }
+                });
                 // Move camera to dining table, wherever it is
                 Bounds tableBounds = _diningTable.GetComponentInChildren<SpriteRenderer>().sprite.bounds;
                 // Orthographic size is 1/2 the vertical size seen by the camera
