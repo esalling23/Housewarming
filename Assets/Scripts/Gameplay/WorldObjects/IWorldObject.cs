@@ -10,5 +10,6 @@ public interface IWorldObject
     string Name { get; }
     WorldObjectType Type { get; }
     int SelectedStyleIndex { get; }
+    bool Active { get; set; }
     void CycleStyle();
 }

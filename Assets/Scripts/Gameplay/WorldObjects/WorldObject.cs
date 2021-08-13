@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 
 /// <summary>
@@ -10,6 +8,8 @@ using UnityEngine.EventSystems;
 public class WorldObject : MonoBehaviour, IWorldObject
 {
     #region Fields
+    // Select support
+    protected bool _active;
 
     // Object details for display
     [SerializeField] protected string _name;
@@ -37,6 +37,11 @@ public class WorldObject : MonoBehaviour, IWorldObject
         get { return _type; }
     }
 
+    public bool Active
+    {
+        get { return _active; }
+        set { _active = value; }
+    }
     #endregion
 
     #region Methods
@@ -54,7 +59,7 @@ public class WorldObject : MonoBehaviour, IWorldObject
     /// </summary>
     void OnMouseDown() {
         // Ignore UI elements
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (Active && !EventSystem.current.IsPointerOverGameObject())
         {
             EventManager.TriggerEvent(EventName.SelectObject, new Dictionary<string, object> {
                 { "obj", this }
