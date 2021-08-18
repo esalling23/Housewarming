@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5085472777420733555}
   - component: {fileID: 5607357562908191811}
   m_Layer: 7
-  m_Name: WorldObject
+  m_Name: WorldObjectBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5085472777420733551}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5156117426040865025}
@@ -93,9 +93,9 @@ MonoBehaviour:
   _name: WorldObject
   _type: 0
   _spriteStyles:
-  - {fileID: 1233381392870721423, guid: 3096c38d37c564fc682147c833f5539b, type: 3}
-  - {fileID: 671010282010775086, guid: 3096c38d37c564fc682147c833f5539b, type: 3}
-  - {fileID: -5705065506626769016, guid: 3096c38d37c564fc682147c833f5539b, type: 3}
+  - {fileID: -3247110344562514806, guid: 70dcbcfd56dd44b5e8931a174978a505, type: 3}
+  - {fileID: -6131758395618014497, guid: 70dcbcfd56dd44b5e8931a174978a505, type: 3}
+  - {fileID: -5691306560196447228, guid: 70dcbcfd56dd44b5e8931a174978a505, type: 3}
   _childSprite: {fileID: 7938728430270355261}
   _spriteColliderOffset: {x: 0, y: 0}
 --- !u!1 &6663722201335252845
@@ -169,7 +169,7 @@ SpriteRenderer:
   m_SortingLayerID: -719749731
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2883652986060550806, guid: 70dcbcfd56dd44b5e8931a174978a505, type: 3}
+  m_Sprite: {fileID: -5417258142858473688, guid: 70dcbcfd56dd44b5e8931a174978a505, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

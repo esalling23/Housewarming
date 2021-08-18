@@ -93,7 +93,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5085472777420733551, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: m_Name
-      value: Bookcase
+      value: Bookcase Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7938728430270355261, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1233381392870721423, guid: 3096c38d37c564fc682147c833f5539b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
