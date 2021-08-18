@@ -42,6 +42,11 @@ public class WorldObject : MonoBehaviour, IWorldObject
         get { return _active; }
         set { _active = value; }
     }
+
+    public GameObject GameObject
+    {
+        get { return gameObject; }
+    }
     #endregion
 
     #region Methods

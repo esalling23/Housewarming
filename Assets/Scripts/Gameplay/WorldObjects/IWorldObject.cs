@@ -11,5 +11,6 @@ public interface IWorldObject
     WorldObjectType Type { get; }
     int SelectedStyleIndex { get; }
     bool Active { get; set; }
+    GameObject GameObject { get; }
     void CycleStyle();
 }
