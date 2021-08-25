@@ -15,6 +15,7 @@ public class AreaManager : MonoBehaviour
     // Used for Food phase
     [SerializeField] Transform _diningTable;
     [SerializeField] Transform _foodContainer;
+    GameObject _foodGameObj;
     // Used to determine initial random placements of world objects
     [SerializeField] Tilemap _wallTiles;
 
@@ -28,7 +29,7 @@ public class AreaManager : MonoBehaviour
 
     void Awake()
     {
-
+        _foodGameObj = _foodContainer.gameObject;
     }
 
     void Start()
@@ -56,6 +57,9 @@ public class AreaManager : MonoBehaviour
                     { "types", new WorldObjectType[] { WorldObjectType.Sprite, WorldObjectType.Tile } },
                     { "clear", true }
                 });
+
+                // Hide food
+                _foodGameObj.SetActive(false);
 
             break;
 
@@ -85,8 +89,9 @@ public class AreaManager : MonoBehaviour
                 foodPos.x = tablePos.x;
                 foodPos.y = tablePos.y;
                 _foodContainer.position = foodPos;
+                // Show food
+                _foodGameObj.SetActive(true);
 
-                // Generate plates
 
             break;
 
