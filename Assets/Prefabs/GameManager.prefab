@@ -73,24 +73,30 @@ MonoBehaviour:
     - phase: 2
       dialoguePhase:
         dialogues:
-        - 
-        - 
-        - 
-        - 
-        - 
+        - 'Yum, looks so good! '
+        - 'Naomi: Don''t let Oliver alone with all that. '
+        - 'Oliver: Meow?'
+        - 'Anyway, all these food smells have us feeling the zoomies. Wanna play
+          a game? '
+        - 'We won''t wait for your answer, we know you do! Let''s play hide and seek
+          - we''ll hide, you seek! '
+        - Get ready, get set, go!
         completed: 0
         started: 0
       areaPhase:
         name: Cat Chase
         completed: 0
         started: 0
-    - phase: 0
+    - phase: 3
       dialoguePhase:
-        dialogues: []
+        dialogues:
+        - You found us! Darn, you're just too smart...
+        - What else did you find there? Nice box!
+        - By the way, we heard Other Dad come home! Let's go find him!
         completed: 0
         started: 0
       areaPhase:
-        name: 
+        name: Patio
         completed: 0
         started: 0
 --- !u!114 &4548087331245057907
@@ -117,7 +123,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 667395efaa5d84b81813a1c2023810b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _draggablesContainer: {fileID: 0}
+  _diningTable: {fileID: 0}
+  _foodContainer: {fileID: 0}
+  _wallTiles: {fileID: 0}
   _worldObjects:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _plateObjects: []
