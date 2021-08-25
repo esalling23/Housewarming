@@ -136,8 +136,7 @@ public class WorldObjectManager : MonoBehaviour
     void HandleSelectObjectEvent(Dictionary<string, object> msg)
     {
         _selected = (IWorldObject) msg["obj"];
-        WorldObject obj = (WorldObject) _selected;
-        _selectedTransform = obj.gameObject.transform;
+        _selectedTransform = _selected.GameObject.transform;
 
         Debug.Log($"We have selected a new object: {_selected}");
     }
