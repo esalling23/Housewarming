@@ -10,14 +10,14 @@ public class AreaManager : MonoBehaviour
 {
     #region Fields
 
-    AreaPhase _currentArea;
     // Various area game objects to be loaded in
-    [SerializeField] GameObject _areaView;
-    Transform _draggablesContainer;
+    [SerializeField] Transform _draggablesContainer;
     // Used for Food phase
-    GameObject _diningTable;
+    [SerializeField] Transform _diningTable;
+    [SerializeField] Transform _foodContainer;
     // Used to determine initial random placements of world objects
-    Tilemap _wallTiles;
+    [SerializeField] Tilemap _wallTiles;
+
     [SerializeField] GameObject[] _worldObjects;
     [SerializeField] GameObject[] _plateObjects;
     Vector3 _randPos = new Vector3();
@@ -28,10 +28,7 @@ public class AreaManager : MonoBehaviour
 
     void Awake()
     {
-        _areaView = GameObject.FindWithTag("AreaView");
-        _diningTable = GameObject.FindWithTag("DiningTable");
-        _draggablesContainer = GameObject.FindWithTag("Draggables").transform;
-        _wallTiles = GameObject.FindWithTag("Walls").GetComponent<Tilemap>();
+
     }
 
     void Start()
