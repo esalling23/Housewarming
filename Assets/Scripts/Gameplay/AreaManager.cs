@@ -43,6 +43,8 @@ public class AreaManager : MonoBehaviour
     void StartArea(Dictionary<string, object> msg)
     {
         Camera camera = GameManager.Instance.MainCamera;
+        Transform cameraTransform = camera.transform;
+
         switch (GameManager.Instance.CurrentPhase.phase)
         {
             case GamePhaseName.Decorating:
@@ -64,14 +66,25 @@ public class AreaManager : MonoBehaviour
                     { "types", new WorldObjectType[] { WorldObjectType.Food } },
                     { "clear", true }
                 });
-                // Move camera to dining table, wherever it is
-                Bounds tableBounds = _diningTable.GetComponentInChildren<SpriteRenderer>().sprite.bounds;
+
                 // Orthographic size is 1/2 the vertical size seen by the camera
                 // Sets the camera to be sized around the sprite bounds
+                Bounds tableBounds = _diningTable.GetComponentInChildren<SpriteRenderer>().sprite.bounds;
                 float cameraSize = tableBounds.size.y * Screen.height / Screen.width;
                 camera.orthographicSize = cameraSize;
 
-                camera.transform.LookAt(_diningTable.transform.position);
+                // Move camera to dining table, wherever it is
+                Vector3 tablePos = _diningTable.position;
+                Vector3 camPos = cameraTransform.position;
+                camPos.x = tablePos.x;
+                camPos.y = tablePos.y;
+                cameraTransform.position = camPos;
+
+                // Move Food
+                Vector3 foodPos = _foodContainer.position;
+                foodPos.x = tablePos.x;
+                foodPos.y = tablePos.y;
+                _foodContainer.position = foodPos;
 
                 // Generate plates
 
