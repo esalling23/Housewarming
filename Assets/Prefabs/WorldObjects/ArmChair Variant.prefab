@@ -156,6 +156,10 @@ PrefabInstance:
       value: Arm Chair
       objectReference: {fileID: 0}
     - target: {fileID: 5607357562908191811, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
+      propertyPath: _type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607357562908191811, guid: 1f56b166ae92b4184a698499902164b8, type: 3}
       propertyPath: _spriteStyles.Array.size
       value: 6
       objectReference: {fileID: 0}

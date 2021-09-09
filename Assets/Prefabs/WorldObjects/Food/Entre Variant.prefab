@@ -104,6 +104,10 @@ PrefabInstance:
       value: Entre Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8779218510381403818, guid: fec16496049414236b10d339333ba28c, type: 3}
+      propertyPath: _type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779218510381403818, guid: fec16496049414236b10d339333ba28c, type: 3}
       propertyPath: _spriteStyles.Array.data[1]
       value: 
       objectReference: {fileID: 21300000, guid: ad7066b6ef01c40a7a5e90e5f31dd1d9, type: 3}
