@@ -12,6 +12,7 @@ public enum EventName
     SelectObject,
     RotateObject,
     CycleObject,
+    CatFound,
     StartDialogue,
     CompleteDialogue,
     StartArea,
