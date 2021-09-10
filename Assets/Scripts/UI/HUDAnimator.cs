@@ -33,9 +33,9 @@ public class HUDAnimator : MonoBehaviour
     public void AnimateHUDIn()
     {
         LTSeq seq = LeanTween.sequence();
+
         seq.append(() => AnimateConfirmPromptOut(0f));
         //seq.append(() => AnimateContinueBtnIn());
-        seq.append(() => gameObject.SetActive(true));
         seq.append(() => AnimateOptionBtnsIn());
     }
 
@@ -44,7 +44,6 @@ public class HUDAnimator : MonoBehaviour
         LTSeq seq = LeanTween.sequence();
 
         seq.append(() => AnimateConfirmPromptOut(0f));
-        seq.append(() => gameObject.SetActive(false));
     }
 
     public void AnimateConfirmPromptIn(float _time = 1f)
