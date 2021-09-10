@@ -16,6 +16,7 @@ public class WorldObjectManager : MonoBehaviour
     // Consider splitting into seperate lists of each type of world object
     // so we don't have to loop & locate the types we want later on
     IWorldObject[] _worldObjects;
+    IWorldObject[] _furniture;
 
     // Singleton instance
     static WorldObjectManager _instance;
@@ -52,6 +53,19 @@ public class WorldObjectManager : MonoBehaviour
         get { return _selected; }
     }
 
+    private IWorldObject[] WorldObjects
+    {
+        get {
+            return _worldObjects;
+        }
+    }
+
+    public IWorldObject[] Furniture
+    {
+        get {
+            return _furniture;
+        }
+    }
 
     #endregion
 
@@ -86,6 +100,8 @@ public class WorldObjectManager : MonoBehaviour
     {
         _worldObjects = FindObjectsOfType<MonoBehaviour>()
             .OfType<IWorldObject>().ToArray();
+
+        _furniture = (IWorldObject[]) _worldObjects.Where(o => o.Type == WorldObjectType.Furniture).ToArray();
     }
 
     /// <summary>
@@ -95,8 +111,6 @@ public class WorldObjectManager : MonoBehaviour
     /// <param name="msg">Dictionary with "types" and "clear" keys</param>
     void HandleEnableSelectEvent(Dictionary<string, object> msg)
     {
-        //GetWorldObjects();
-
         WorldObjectType[] types = (WorldObjectType[]) msg["types"];
 
         foreach (IWorldObject obj in _worldObjects)
