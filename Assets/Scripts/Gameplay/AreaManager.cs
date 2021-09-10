@@ -98,18 +98,12 @@ public class AreaManager : MonoBehaviour
                 float cameraSize = tableBounds.size.y * Screen.height / Screen.width;
                 camera.orthographicSize = cameraSize;
 
-                // Move camera to dining table, wherever it is
                 Vector3 tablePos = _diningTable.position;
-                Vector3 camPos = cameraTransform.position;
-                camPos.x = tablePos.x;
-                camPos.y = tablePos.y;
-                cameraTransform.position = camPos;
 
+                // Move camera to dining table, wherever it is
+                _cameraTransform.position = TransformUtils.SetXYPosition(_cameraTransform.position, tablePos);
                 // Move Food
-                Vector3 foodPos = _foodContainer.position;
-                foodPos.x = tablePos.x;
-                foodPos.y = tablePos.y;
-                _foodContainer.position = foodPos;
+                _foodContainer.position = TransformUtils.SetXYPosition(_foodContainer.position, tablePos);
                 // Show food
                 _foodGameObj.SetActive(true);
             break;
