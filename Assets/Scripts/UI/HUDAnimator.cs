@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +20,10 @@ public class HUDAnimator : MonoBehaviour
     // Continue Button
     [SerializeField] RectTransform _continueAreaBtn;
 
+    // Cover screen for flash
+    [SerializeField] GameObject _coverScreen;
+    RectTransform _coverScreenRect;
+
     #endregion
 
     #region Methods
@@ -28,6 +32,9 @@ public class HUDAnimator : MonoBehaviour
     {
         _confirmHidePos = _confirmPrompt.anchoredPosition;
         _optionsHidePos = _optionsBtns.anchoredPosition;
+
+        _coverScreenRect = _coverScreen.GetComponent<RectTransform>();
+        _coverScreen.SetActive(false);
     }
 
     public void AnimateHUDIn()
@@ -44,6 +51,21 @@ public class HUDAnimator : MonoBehaviour
         LTSeq seq = LeanTween.sequence();
 
         seq.append(() => AnimateConfirmPromptOut(0f));
+    }
+
+    public void AnimateScreenFlash(Action action)
+    {
+        float fadeIn = 0.6f;
+        float fadeOut = 0.5f;
+
+        LTSeq seq = LeanTween.sequence();
+        seq.append(() => _coverScreen.SetActive(true));
+        seq.append(() => LeanTween.color(_coverScreenRect, Color.black, fadeIn));
+        seq.append(fadeIn * 2);
+        seq.append(() => action());
+        seq.append(() => LeanTween.color(_coverScreenRect, new Color(0, 0, 0, 0), fadeOut));
+        seq.append(fadeOut);
+        seq.append(() => _coverScreen.SetActive(false));
     }
 
     public void AnimateConfirmPromptIn(float _time = 1f)
