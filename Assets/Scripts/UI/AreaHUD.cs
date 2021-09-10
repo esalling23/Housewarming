@@ -26,8 +26,9 @@ public class AreaHUD : MonoBehaviour
 
     void Start()
     {
-        EventManager.StartListening(EventName.StartArea, ShowHUD);
+        EventManager.StartListening(EventName.StartArea, HandleStartAreaEvent);
         EventManager.StartListening(EventName.SelectObject, UpdateSelectedObject);
+        
         CloseHUD();
     }
 
@@ -35,9 +36,20 @@ public class AreaHUD : MonoBehaviour
     /// Event handler - shows HUD and handles HUD changes from area to area
     /// </summary>
     /// <param name="msg"></param>
-    void ShowHUD(Dictionary<string, object> msg)
+    void HandleStartAreaEvent(Dictionary<string, object> msg)
     {
-        _animator.AnimateHUDIn();
+        switch (GameManager.Instance.CurrentPhase.phase)
+        {
+            case GamePhaseName.CatChase:
+                _animator.AnimateHUDOut();
+            break;
+
+            default:
+                _animator.AnimateHUDIn();
+                _rotateButton.gameObject.SetActive(false);
+                _cycleButton.gameObject.SetActive(false);
+            break;
+        }
     }
 
     /// <summary>

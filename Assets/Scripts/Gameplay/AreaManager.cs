@@ -38,7 +38,7 @@ public class AreaManager : MonoBehaviour
 
     void Start()
     {
-        EventManager.StartListening(EventName.StartArea, StartArea);
+        EventManager.StartListening(EventName.StartArea, HandleStartAreaEvent);
         _cameraRoomViewSize = GameManager.Instance.MainCamera.orthographicSize;
         _cameraTransform = GameManager.Instance.MainCamera.transform;
     }
@@ -50,10 +50,18 @@ public class AreaManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Event handler - manages setting up area view for new phase
+    /// Event handler for starting area
     /// </summary>
     /// <param name="msg">null</param>
-    void StartArea(Dictionary<string, object> msg)
+    void HandleStartAreaEvent(Dictionary<string, object> msg)
+    {
+        SetupArea();
+    }
+
+    /// <summary>
+    /// Manages setting up area view for new phase
+    /// </summary>
+    void SetupArea()
     {
         Camera camera = GameManager.Instance.MainCamera;
 
@@ -104,11 +112,15 @@ public class AreaManager : MonoBehaviour
                 _foodContainer.position = foodPos;
                 // Show food
                 _foodGameObj.SetActive(true);
-
-
             break;
 
+            case GamePhaseName.CatChase:
 
+
+                // Set camera size
+                SetCameraToRoomView();
+
+                break;
         }
     }
 
