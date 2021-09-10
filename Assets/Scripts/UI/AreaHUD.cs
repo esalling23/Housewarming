@@ -70,12 +70,15 @@ public class AreaHUD : MonoBehaviour
     {
         switch (type)
         {
-            case WorldObjectType.Tile:
+            case WorldObjectType.Floor:
+            case WorldObjectType.Walls:
                 _rotateButton.gameObject.SetActive(false);
+                _cycleButton.gameObject.SetActive(true);
             break;
 
-            case WorldObjectType.Sprite:
+            case WorldObjectType.Furniture:
                 _rotateButton.gameObject.SetActive(true);
+                _cycleButton.gameObject.SetActive(true);
             break;
         }
     }
