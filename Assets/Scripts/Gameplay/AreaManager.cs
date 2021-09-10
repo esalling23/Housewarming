@@ -22,6 +22,10 @@ public class AreaManager : MonoBehaviour
     [SerializeField] GameObject[] _worldObjects;
     [SerializeField] GameObject[] _plateObjects;
     Vector3 _randPos = new Vector3();
+    // Cache camera data
+    Transform _cameraTransform;
+    float _cameraRoomViewSize;
+
 
     #endregion
 
@@ -35,6 +39,14 @@ public class AreaManager : MonoBehaviour
     void Start()
     {
         EventManager.StartListening(EventName.StartArea, StartArea);
+        _cameraRoomViewSize = GameManager.Instance.MainCamera.orthographicSize;
+        _cameraTransform = GameManager.Instance.MainCamera.transform;
+    }
+
+    void SetCameraToRoomView()
+    {
+        GameManager.Instance.MainCamera.orthographicSize = _cameraRoomViewSize;
+        _cameraTransform.position = TransformUtils.SetXYPosition(_cameraTransform.position, Vector3.zero);
     }
 
     /// <summary>
@@ -44,7 +56,6 @@ public class AreaManager : MonoBehaviour
     void StartArea(Dictionary<string, object> msg)
     {
         Camera camera = GameManager.Instance.MainCamera;
-        Transform cameraTransform = camera.transform;
 
         switch (GameManager.Instance.CurrentPhase.phase)
         {
@@ -54,13 +65,15 @@ public class AreaManager : MonoBehaviour
                 // PlaceWorldObjects();
                 EventManager.TriggerEvent(EventName.EnableObjectSelect, new Dictionary<string, object>
                 {
-                    { "types", new WorldObjectType[] { WorldObjectType.Sprite, WorldObjectType.Tile } },
+                    { "types", new WorldObjectType[] { WorldObjectType.Furniture, WorldObjectType.Walls, WorldObjectType.Floor } },
                     { "clear", true }
                 });
 
                 // Hide food
                 _foodGameObj.SetActive(false);
 
+                // Set camera size
+                SetCameraToRoomView();
             break;
 
             case GamePhaseName.Food:
