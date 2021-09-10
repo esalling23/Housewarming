@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator TempGameStart()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         StartGame();
     }
@@ -155,8 +155,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        int nextPhase = phaseIndex + 1;
-        _currentPhase = phases[nextPhase];
+        _currentPhase = phases[phaseIndex + 1];
 
         EventManager.TriggerEvent(EventName.StartDialogue, null);
     }
