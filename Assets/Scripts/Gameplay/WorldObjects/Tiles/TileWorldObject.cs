@@ -41,11 +41,6 @@ public class TileWorldObject : WorldObject
         }
     }
 
-    void Start()
-    {
-        _type = WorldObjectType.Tile;
-    }
-
     public override void CycleStyle()
     {
         _selectedStyleIndex = WorldObjectUtils.GetNextStyleIndex(_selectedStyleIndex, CycleLimit);

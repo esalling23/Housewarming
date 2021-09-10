@@ -7,7 +7,10 @@ using UnityEngine;
 /// </summary>
 public enum WorldObjectType
 {
-    Sprite,
-    Tile,
-    Food
+    Food,
+    // Props might be on top of furniture (a book, plate, box)
+    Props,
+    Furniture,
+    Walls,
+    Floor
 }
