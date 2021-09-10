@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -137,6 +137,11 @@ public class AreaHUD : MonoBehaviour
     {
         _animator.AnimateConfirmPromptOut();
         _animator.AnimateOptionBtnsIn();
+    }
+
+    public void ScreenFlash(Action action)
+    {
+        _animator.AnimateScreenFlash(action);
     }
 
     #endregion

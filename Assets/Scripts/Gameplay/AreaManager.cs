@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -9,23 +10,26 @@ using UnityEngine.Tilemaps;
 public class AreaManager : MonoBehaviour
 {
     #region Fields
+    [SerializeField] AreaHUD _areaHUD;
 
     // Various area game objects to be loaded in
     [SerializeField] Transform _draggablesContainer;
-    // Used for Food phase
+
+    // Food phase support
     [SerializeField] Transform _diningTable;
     [SerializeField] Transform _foodContainer;
     GameObject _foodGameObj;
-    // Used to determine initial random placements of world objects
-    [SerializeField] Tilemap _wallTiles;
 
-    [SerializeField] GameObject[] _worldObjects;
-    [SerializeField] GameObject[] _plateObjects;
-    Vector3 _randPos = new Vector3();
+    // Cat Chase phase support
+    private int _catFoundCount = 0;
+    [SerializeField] private int _catFoundLimit = 2;
+    IWorldObject[] _hidingSpots;
+
     // Cache camera data
     Transform _cameraTransform;
     float _cameraRoomViewSize;
 
+    // Vector3 _randPos = new Vector3();
 
     #endregion
 
@@ -34,11 +38,13 @@ public class AreaManager : MonoBehaviour
     void Awake()
     {
         _foodGameObj = _foodContainer.gameObject;
+        _hidingSpots = WorldObjectManager.Instance.Furniture;
     }
 
     void Start()
     {
         EventManager.StartListening(EventName.StartArea, HandleStartAreaEvent);
+        EventManager.StartListening(EventName.CatFound, HandleCatFoundEvent);
         _cameraRoomViewSize = GameManager.Instance.MainCamera.orthographicSize;
         _cameraTransform = GameManager.Instance.MainCamera.transform;
     }
@@ -56,6 +62,29 @@ public class AreaManager : MonoBehaviour
     void HandleStartAreaEvent(Dictionary<string, object> msg)
     {
         SetupArea();
+    }
+
+    void HandleCatFoundEvent(Dictionary<string, object> msg)
+    {
+        IWorldObject hidingSpot = (IWorldObject) msg["worldObject"];
+        _catFoundCount++;
+
+        // To do - animations, etc.
+        // LeanTween.move(_optionsBtns, _optionsHidePos, _time).setEaseInBack();
+
+        if (_catFoundCount >= _catFoundLimit)
+        {
+            EventManager.TriggerEvent(EventName.CompleteArea, null);
+        }
+        else
+        {
+            _hidingSpots = (IWorldObject[]) _hidingSpots
+                .Where(o => !Object.ReferenceEquals(o, hidingSpot))
+                .ToArray();
+
+            // Find another cat!
+            HideCats(hidingSpot.GameObject.GetComponent<CatHiding>());
+        }
     }
 
     /// <summary>
@@ -110,6 +139,9 @@ public class AreaManager : MonoBehaviour
 
             case GamePhaseName.CatChase:
 
+                // Choose a random sprite world object
+                // & give it the CatHiding component
+                HideCats(null);
 
                 // Set camera size
                 SetCameraToRoomView();
@@ -118,30 +150,55 @@ public class AreaManager : MonoBehaviour
         }
     }
 
-    void PlaceWorldObjects()
+    void HideCats(CatHiding oldSpot)
     {
-        BoxCollider2D newObject;
-        // Instantiate & place objects for decorating phase
-        foreach (GameObject worldObj in _worldObjects)
+        int numSpots = _hidingSpots.Length;
+
+        if (numSpots == 0)
         {
-            SetRandomPos();
-            newObject = Instantiate(worldObj, _randPos, Quaternion.identity, _draggablesContainer).GetComponent<BoxCollider2D>();
-
-            if (!WorldObjectUtils.CanPlace(newObject))
-            {
-                Debug.Log("Placing again");
-                SetRandomPos();
-                newObject.gameObject.transform.position = _randPos;
-                Debug.Log("Good place: " + WorldObjectUtils.CanPlace(newObject).ToString());
-            }
+            Debug.LogError("No furniture in scene to hide in");
         }
+
+        int rand = Random.Range(0, numSpots);
+
+        IWorldObject newSpot = _hidingSpots[rand];
+
+        Debug.Log(newSpot);
+
+        _areaHUD.ScreenFlash(() =>
+        {
+            if (oldSpot != null)
+            {
+                oldSpot.Clear();
+            }
+            newSpot.GameObject.AddComponent<CatHiding>();
+        });
     }
 
-    void SetRandomPos()
-    {
-        _randPos = WorldObjectUtils.GetRandomPos(_wallTiles.cellBounds, _randPos);
-        _randPos.x = Mathf.RoundToInt(_randPos.x);
-        _randPos.y = Mathf.RoundToInt(_randPos.y);
-    }
+    // void PlaceWorldObjects()
+    // {
+    //     BoxCollider2D newObject;
+    //     // Instantiate & place objects for decorating phase
+    //     foreach (GameObject worldObj in _worldObjects)
+    //     {
+    //         SetRandomPos();
+    //         newObject = Instantiate(worldObj, _randPos, Quaternion.identity, _draggablesContainer).GetComponent<BoxCollider2D>();
+
+    //         if (!WorldObjectUtils.CanPlace(newObject))
+    //         {
+    //             Debug.Log("Placing again");
+    //             SetRandomPos();
+    //             newObject.gameObject.transform.position = _randPos;
+    //             Debug.Log("Good place: " + WorldObjectUtils.CanPlace(newObject).ToString());
+    //         }
+    //     }
+    // }
+
+    // void SetRandomPos()
+    // {
+    //     _randPos = WorldObjectUtils.GetRandomPos(_wallTiles.cellBounds, _randPos);
+    //     _randPos.x = Mathf.RoundToInt(_randPos.x);
+    //     _randPos.y = Mathf.RoundToInt(_randPos.y);
+    // }
     #endregion
 }
