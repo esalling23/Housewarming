@@ -14,7 +14,16 @@ public class SpriteWorldObject : WorldObject
 
     #endregion
 
+    public float SpriteHeight
+    {
+        get
+        {
+            return _childSprite.bounds.size.y;
+        }
+    }
+
     #region Methods
+
     void Awake()
     {
         _boxCollider = GetComponent<BoxCollider2D>();
