@@ -58,6 +58,7 @@ public class SpriteWorldObject : WorldObject
         }
         _selectedStyleIndex = WorldObjectUtils.GetNextStyleIndex(_selectedStyleIndex, _spriteStyles.Length - 1);
         SetSprite();
+        SetColliderToSpriteSize();
     }
 
     void SetSprite()

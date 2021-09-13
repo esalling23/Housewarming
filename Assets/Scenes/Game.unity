@@ -465,6 +465,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &681776307 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2886534428606739870, guid: f8242107388314f19a6281ab38331043, type: 3}
+  m_PrefabInstance: {fileID: 2886534428240431058}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &848828360 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7170060459317130897, guid: fccd3ab04beda4bda876a985ec1de035, type: 3}
@@ -790,6 +795,14 @@ PrefabInstance:
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: bc5f0232b6f0f425fa58b9ab5b511708, type: 3}
+    - target: {fileID: 2886534428606739870, guid: f8242107388314f19a6281ab38331043, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -126
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886534428606739870, guid: f8242107388314f19a6281ab38331043, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -50
+      objectReference: {fileID: 0}
     - target: {fileID: 2886534428795344241, guid: f8242107388314f19a6281ab38331043, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -815,12 +828,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4528632603300373117, guid: f8242107388314f19a6281ab38331043, type: 3}
+      propertyPath: _continueBtn
+      value: 
+      objectReference: {fileID: 681776307}
+    - target: {fileID: 4528632603300373117, guid: f8242107388314f19a6281ab38331043, type: 3}
       propertyPath: _confirmShowPos.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4528632603300373117, guid: f8242107388314f19a6281ab38331043, type: 3}
       propertyPath: _confirmShowPos.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528632603300373117, guid: f8242107388314f19a6281ab38331043, type: 3}
+      propertyPath: _continueBtnShowPos.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528632603300373117, guid: f8242107388314f19a6281ab38331043, type: 3}
+      propertyPath: _continueBtnShowPos.y
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4552438265034516808, guid: f8242107388314f19a6281ab38331043, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1001,51 +1026,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
       propertyPath: _gameData.gamePhases.Array.data[0].phase
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
-      propertyPath: _gameData.gamePhases.Array.data[1].phase
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
-      propertyPath: _gameData.gamePhases.Array.data[2].phase
+      propertyPath: _gameData.gamePhases.Array.data[1].phase
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
-      propertyPath: _gameData.gamePhases.Array.data[0].areaPhase.name
-      value: Cat Chase
-      objectReference: {fileID: 0}
-    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
-      propertyPath: _gameData.gamePhases.Array.data[1].areaPhase.name
-      value: Decorating
-      objectReference: {fileID: 0}
-    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
-      propertyPath: _gameData.gamePhases.Array.data[2].areaPhase.name
-      value: Dining Table
-      objectReference: {fileID: 0}
-    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
-      propertyPath: _gameData.gamePhases.Array.data[0].dialoguePhase.dialogues.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
-      propertyPath: _gameData.gamePhases.Array.data[1].dialoguePhase.dialogues.Array.size
+      propertyPath: _gameData.gamePhases.Array.data[2].phase
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
-      propertyPath: _gameData.gamePhases.Array.data[2].dialoguePhase.dialogues.Array.size
+      propertyPath: _gameData.gamePhases.Array.data[0].areaPhase.name
+      value: Decorating
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
+      propertyPath: _gameData.gamePhases.Array.data[1].areaPhase.name
+      value: Dining Table
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
+      propertyPath: _gameData.gamePhases.Array.data[2].areaPhase.name
+      value: Cat Chase
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
+      propertyPath: _gameData.gamePhases.Array.data[0].dialoguePhase.dialogues.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
+      propertyPath: _gameData.gamePhases.Array.data[1].dialoguePhase.dialogues.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
+      propertyPath: _gameData.gamePhases.Array.data[2].dialoguePhase.dialogues.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
       propertyPath: _gameData.gamePhases.Array.data[0].dialoguePhase.dialogues.Array.data[0]
-      value: 'Yum, looks so good! '
+      value: 'You''re finally awake! '
       objectReference: {fileID: 0}
     - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
       propertyPath: _gameData.gamePhases.Array.data[0].dialoguePhase.dialogues.Array.data[1]
-      value: 'Naomi: Don''t let Oliver alone with all that. '
+      value: 'Are you ready for the party? '
       objectReference: {fileID: 0}
     - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
       propertyPath: _gameData.gamePhases.Array.data[0].dialoguePhase.dialogues.Array.data[2]
-      value: 'Oliver: Meow?'
+      value: It's probably time to get the food out...
       objectReference: {fileID: 0}
     - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
       propertyPath: _gameData.gamePhases.Array.data[0].dialoguePhase.dialogues.Array.data[3]
@@ -1063,23 +1088,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
       propertyPath: _gameData.gamePhases.Array.data[1].dialoguePhase.dialogues.Array.data[0]
-      value: 'You''re finally awake! '
-      objectReference: {fileID: 0}
-    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
-      propertyPath: _gameData.gamePhases.Array.data[1].dialoguePhase.dialogues.Array.data[1]
-      value: 'Are you ready for the party? '
-      objectReference: {fileID: 0}
-    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
-      propertyPath: _gameData.gamePhases.Array.data[2].dialoguePhase.dialogues.Array.data[0]
       value: Wow, it looks great in here! Nice decorating!
       objectReference: {fileID: 0}
     - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
-      propertyPath: _gameData.gamePhases.Array.data[2].dialoguePhase.dialogues.Array.data[1]
+      propertyPath: _gameData.gamePhases.Array.data[1].dialoguePhase.dialogues.Array.data[1]
       value: 'We''re getting pretty hungry, aren''t you? '
       objectReference: {fileID: 0}
     - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
-      propertyPath: _gameData.gamePhases.Array.data[2].dialoguePhase.dialogues.Array.data[2]
+      propertyPath: _gameData.gamePhases.Array.data[1].dialoguePhase.dialogues.Array.data[2]
       value: It's probably time to get the food out...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
+      propertyPath: _gameData.gamePhases.Array.data[1].dialoguePhase.dialogues.Array.data[3]
+      value: 'Anyway, all these food smells have us feeling the zoomies. Wanna play
+        a game? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
+      propertyPath: _gameData.gamePhases.Array.data[1].dialoguePhase.dialogues.Array.data[4]
+      value: 'We won''t wait for your answer, we know you do! Let''s play hide and
+        seek - we''ll hide, you seek! '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
+      propertyPath: _gameData.gamePhases.Array.data[1].dialoguePhase.dialogues.Array.data[5]
+      value: Get ready, get set, go!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
+      propertyPath: _gameData.gamePhases.Array.data[2].dialoguePhase.dialogues.Array.data[0]
+      value: 'Yum, looks so good! '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
+      propertyPath: _gameData.gamePhases.Array.data[2].dialoguePhase.dialogues.Array.data[1]
+      value: 'Naomi: Don''t let Oliver alone with all that. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548087331245057918, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
+      propertyPath: _gameData.gamePhases.Array.data[2].dialoguePhase.dialogues.Array.data[2]
+      value: 'Oliver: Meow?'
       objectReference: {fileID: 0}
     - target: {fileID: 4548087331245057919, guid: a645d32536dfd4d47ad0feb9cbaeb283, type: 3}
       propertyPath: m_Name
@@ -1144,67 +1187,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4ab6285881d540b5b9961484515d6f1, type: 3}
---- !u!1001 &8472580401766155030
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8472580400466250003, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472580400466250003, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472580400466250003, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472580400466250003, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472580400466250003, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472580400466250003, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472580400466250003, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472580400466250003, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472580400466250003, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472580400466250003, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472580400466250003, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472580400466250005, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
-      propertyPath: m_Name
-      value: Cats
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472580400466250005, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 55e2cb86c28794ee3a33b4e278b3a39d, type: 3}
 --- !u!1001 &8653717699757130927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1250,11 +1232,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4515598381782657767, guid: fccd3ab04beda4bda876a985ec1de035, type: 3}
       propertyPath: m_Size.x
-      value: 2.9125123
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 4515598381782657767, guid: fccd3ab04beda4bda876a985ec1de035, type: 3}
       propertyPath: m_Size.y
-      value: 2.9110098
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 4515598381782657767, guid: fccd3ab04beda4bda876a985ec1de035, type: 3}
       propertyPath: m_Offset.x
@@ -1262,7 +1244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4515598381782657767, guid: fccd3ab04beda4bda876a985ec1de035, type: 3}
       propertyPath: m_Offset.y
-      value: 0.019618273
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4636658480689066103, guid: fccd3ab04beda4bda876a985ec1de035, type: 3}
       propertyPath: m_SizeDelta.x
