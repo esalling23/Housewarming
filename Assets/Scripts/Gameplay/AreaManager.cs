@@ -69,16 +69,16 @@ public class AreaManager : MonoBehaviour
         IWorldObject hidingSpot = (IWorldObject) msg["worldObject"];
         _catFoundCount++;
 
-        // To do - animations, etc.
-        // LeanTween.move(_optionsBtns, _optionsHidePos, _time).setEaseInBack();
-
         if (_catFoundCount >= _catFoundLimit)
         {
-            EventManager.TriggerEvent(EventName.CompleteArea, null);
+            _areaHUD.ScreenFlash(() =>
+            {
+                EventManager.TriggerEvent(EventName.CompleteArea, null);
+            });
         }
         else
         {
-            _hidingSpots = (IWorldObject[]) _hidingSpots
+            _hidingSpots = _hidingSpots
                 .Where(o => !Object.ReferenceEquals(o, hidingSpot))
                 .ToArray();
 
