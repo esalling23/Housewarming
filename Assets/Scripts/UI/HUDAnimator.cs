@@ -12,13 +12,15 @@ public class HUDAnimator : MonoBehaviour
     [SerializeField] Vector2 _optionsShowPos;
     Vector2 _optionsHidePos;
 
+    // Complete Area Button
+    [SerializeField] RectTransform _continueBtn;
+    [SerializeField] Vector2 _continueBtnShowPos;
+    Vector2 _continueBtnHidePos;
+
     // Complete Area Confirmation Prompt
     [SerializeField] RectTransform _confirmPrompt;
     [SerializeField] Vector2 _confirmShowPos;
     Vector2 _confirmHidePos;
-
-    // Continue Button
-    [SerializeField] RectTransform _continueAreaBtn;
 
     // Cover screen for flash
     [SerializeField] GameObject _coverScreen;
@@ -30,6 +32,7 @@ public class HUDAnimator : MonoBehaviour
 
     private void Start()
     {
+        _continueBtnHidePos = _continueBtn.anchoredPosition;
         _confirmHidePos = _confirmPrompt.anchoredPosition;
         _optionsHidePos = _optionsBtns.anchoredPosition;
 
@@ -42,7 +45,7 @@ public class HUDAnimator : MonoBehaviour
         LTSeq seq = LeanTween.sequence();
 
         seq.append(() => AnimateConfirmPromptOut(0f));
-        //seq.append(() => AnimateContinueBtnIn());
+        seq.append(() => AnimateContinueBtnIn());
         seq.append(() => AnimateOptionBtnsIn());
     }
 
@@ -51,6 +54,7 @@ public class HUDAnimator : MonoBehaviour
         LTSeq seq = LeanTween.sequence();
 
         seq.append(() => AnimateConfirmPromptOut(0f));
+        seq.append(() => AnimateContinueBtnOut());
     }
 
     public void AnimateScreenFlash(Action action)
@@ -70,12 +74,22 @@ public class HUDAnimator : MonoBehaviour
 
     public void AnimateConfirmPromptIn(float _time = 1f)
     {
-        LeanTween.move(_confirmPrompt, _confirmShowPos, _animTime).setEaseOutBack();
+        LeanTween.move(_confirmPrompt, _confirmShowPos, _time).setEaseOutBack();
     }
 
     public void AnimateConfirmPromptOut(float _time = 1f)
     {
         LeanTween.move(_confirmPrompt, _confirmHidePos, _time).setEaseInBack();
+    }
+
+    public void AnimateContinueBtnIn(float _time = 1f)
+    {
+        LeanTween.move(_continueBtn, _continueBtnShowPos, _time).setEaseOutBack();
+    }
+
+    public void AnimateContinueBtnOut(float _time = 1f)
+    {
+        LeanTween.move(_continueBtn, _continueBtnHidePos, _time).setEaseInBack();
     }
 
     public void AnimateOptionBtnsIn(float _time = 1f)

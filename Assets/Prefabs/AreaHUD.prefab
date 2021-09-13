@@ -458,9 +458,10 @@ MonoBehaviour:
   _animTime: 1
   _optionsBtns: {fileID: 6106995636634145811}
   _optionsShowPos: {x: -10, y: 10}
+  _continueBtn: {fileID: 2886534428606739870}
+  _continueBtnShowPos: {x: 10, y: 10}
   _confirmPrompt: {fileID: 4570434237254247357}
   _confirmShowPos: {x: 0, y: 0}
-  _continueAreaBtn: {fileID: 2886534428606739870}
   _coverScreen: {fileID: 4249822657473058794}
 --- !u!1 &2886534427230150820
 GameObject:
@@ -992,7 +993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 10, y: 10}
+  m_AnchoredPosition: {x: -154, y: -40}
   m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &2886534428606739869
