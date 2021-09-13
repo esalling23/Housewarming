@@ -9,18 +9,35 @@ using UnityEngine.UI;
 /// </summary>
 public class Typewriter: MonoBehaviour
 {
+    #region Fields
+
+    // Typewriter animation support
     float _speed = 0.1f;
     bool _isWriting = false;
     Coroutine _typeCoroutine;
 
+    // Cache text to be written & text object
     string _currText = "";
     Text _currTextObj;
+
+    #endregion
+
+    #region Properties
 
     public bool IsWriting
     {
         get { return _isWriting; }
     }
 
+    #endregion
+
+    #region Methods
+
+    /// <summary>
+    /// Starts writing text to screen
+    /// </summary>
+    /// <param name="text">Text to write</param>
+    /// <param name="textObject">Text object in scene</param>
     public void Write(string text, Text textObject)
     {
         StopWriting();
@@ -33,6 +50,9 @@ public class Typewriter: MonoBehaviour
         _typeCoroutine = StartCoroutine(Type());
     }
 
+    /// <summary>
+    /// Modifies text object in scene over time
+    /// </summary>
     IEnumerator Type()
     {
         WaitForSeconds typeWait = new WaitForSeconds(_speed);
@@ -45,6 +65,9 @@ public class Typewriter: MonoBehaviour
         _isWriting = false;
     }
 
+    /// <summary>
+    /// Finishes typing - prints text to screen
+    /// </summary>
     public void FinishWriting()
     {
         StopWriting();
@@ -52,7 +75,9 @@ public class Typewriter: MonoBehaviour
         _currTextObj.text = _currText;
     }
 
-
+    /// <summary>
+    /// Stops typing loop
+    /// </summary>
     public void StopWriting()
     {
         _isWriting = false;
@@ -61,4 +86,6 @@ public class Typewriter: MonoBehaviour
             StopCoroutine(_typeCoroutine);
         }
     }
+
+    #endregion
 }
