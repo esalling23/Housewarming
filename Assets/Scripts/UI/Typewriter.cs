@@ -10,28 +10,52 @@ using UnityEngine.UI;
 public class Typewriter: MonoBehaviour
 {
     float _speed = 0.1f;
+    bool _isWriting = false;
     Coroutine _typeCoroutine;
+
+    string _currText = "";
+    Text _currTextObj;
+
+    public bool IsWriting
+    {
+        get { return _isWriting; }
+    }
 
     public void Write(string text, Text textObject)
     {
         StopWriting();
 
+        _isWriting = true;
+        _currText = text;
+        _currTextObj = textObject;
+
         textObject.text = "";
-        _typeCoroutine = StartCoroutine(Type(text, textObject));
+        _typeCoroutine = StartCoroutine(Type());
     }
 
-    IEnumerator Type(string text, Text textObject)
+    IEnumerator Type()
     {
         WaitForSeconds typeWait = new WaitForSeconds(_speed);
-        foreach (char c in text)
+        foreach (char c in _currText)
         {
-            textObject.text = textObject.text + c;
+            _currTextObj.text += c;
             yield return typeWait;
         }
+
+        _isWriting = false;
     }
+
+    public void FinishWriting()
+    {
+        StopWriting();
+
+        _currTextObj.text = _currText;
+    }
+
 
     public void StopWriting()
     {
+        _isWriting = false;
         if (_typeCoroutine != null)
         {
             StopCoroutine(_typeCoroutine);

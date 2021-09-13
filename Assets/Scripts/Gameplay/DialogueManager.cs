@@ -60,7 +60,12 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     void ContinueDialogue()
     {
-        if (_dialogueCounter < _currentDialoguePhase.dialogues.Count() - 1)
+        if (_typewriter.IsWriting)
+        {
+            // if dialogue is still being written, finish it
+            _typewriter.FinishWriting();
+        }
+        else if (_dialogueCounter < _currentDialoguePhase.dialogues.Count() - 1)
         {
             _dialogueCounter++;
             WriteDialogue();
